@@ -4,8 +4,8 @@
   <meta name="generator" content="Hexo 6.1.0">
   <meta charset="utf-8">
   <!-- SEO相关 -->
-  <meta name="robots" content="noindex,follow">
-  <link rel="canonical" href="http://lagrange1813.top/archives/2022/04/"/>
+  
+  <link rel="canonical" href="http://lagrange1813.top/2021/11/10/一个用例让你理解swift之美/"/>
   <!-- 渲染优化 -->
   <!-- <meta http-equiv='x-dns-prefetch-control' content='on' />
   <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
@@ -21,21 +21,23 @@
   <meta content="Lagrange Point 的博客" name="apple-mobile-web-app-title">
   <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
   <meta content="telephone=no" name="format-detection">
-  <link rel="preload" href="/css/style.css?time=1649214964711" as="style">
+  <link rel="preload" href="/css/style.css?time=1649216705815" as="style">
   <link rel="preload" href="/media/fonts/VarelaRound/VarelaRound-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 <link rel="preload" href="/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- 页面元数据 -->
-  <title>归档：2022/4 - Lagrange Point 的博客</title>
+  <title>一个用例让你理解Swift之美 - Lagrange Point 的博客</title>
   <meta name="keywords" content="null">
-  <meta name="description" content="Lagrange Point 的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lagrange Point 的博客">
-<meta property="og:url" content="http://lagrange1813.top/archives/2022/04/index.html">
+  <meta name="description" content="Swift 的标准库提供了一个叫做 sorted(by:) 的方法，会根据你提供的排序闭包将已知类型的数组的值进行排序。sorted(by:) 方法接收一个闭包，这个闭包接收两个与数组内容相同类型的实际参数，然后返回一个 Bool 值来说明第一个值在排序后应该出现在第二个值的前边还是后边，如果第一个值应该出现在第二个值之前 ，排序闭包需要返回 true ，否则返回 false 。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个用例让你理解Swift之美">
+<meta property="og:url" content="http://lagrange1813.top/2021/11/10/%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BE%8B%E8%AE%A9%E4%BD%A0%E7%90%86%E8%A7%A3Swift%E4%B9%8B%E7%BE%8E/index.html">
 <meta property="og:site_name" content="Lagrange Point 的博客">
-<meta property="og:description" content="Lagrange Point 的博客">
+<meta property="og:description" content="Swift 的标准库提供了一个叫做 sorted(by:) 的方法，会根据你提供的排序闭包将已知类型的数组的值进行排序。sorted(by:) 方法接收一个闭包，这个闭包接收两个与数组内容相同类型的实际参数，然后返回一个 Bool 值来说明第一个值在排序后应该出现在第二个值的前边还是后边，如果第一个值应该出现在第二个值之前 ，排序闭包需要返回 true ，否则返回 false 。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://lagrange1813.top/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2021-11-10T04:50:48.000Z">
+<meta property="article:modified_time" content="2022-04-06T03:43:52.731Z">
 <meta property="article:author" content="Lagrange1813">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://lagrange1813.top/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -1658,8 +1660,8 @@ ul.list-v >li>a:hover {
 }
 
   </style>
-  <link rel="stylesheet" href="/css/style.css?time=1649214964711" media="print" onload="this.media='all';this.onload=null">
-  <noscript><link rel="stylesheet" href="/css/style.css?time=1649214964711"></noscript>
+  <link rel="stylesheet" href="/css/style.css?time=1649216705815" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="/css/style.css?time=1649216705815"></noscript>
   
 <script>
 if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMode))
@@ -1730,11 +1732,11 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   volantis.dom = {}; // 页面Dom see: /source/js/app.js etc.
 
   volantis.GLOBAL_CONFIG ={
-    cdn: {"js":{"app":"/js/app.js?time=1649214964711","sites":"/js/plugins/sites.js?time=1649214964711","friends":"/js/plugins/friends.js?time=1649214964711","parallax":"/js/plugins/parallax.js?time=1649214964711","rightMenu":"/js/plugins/rightMenu.js?time=1649214964711","contributors":"/js/plugins/contributors.js?time=1649214964711","message":"/js/thirdparty/message.js?time=1649214964711","search":"/js/search/hexo.js?time=1649214964711"},"css":{"style":"/css/style.css?time=1649214964711","message":"/css/message.css?time=1649214964711"}},
+    cdn: {"js":{"app":"/js/app.js?time=1649216705815","sites":"/js/plugins/sites.js?time=1649216705815","friends":"/js/plugins/friends.js?time=1649216705815","parallax":"/js/plugins/parallax.js?time=1649216705815","rightMenu":"/js/plugins/rightMenu.js?time=1649216705815","contributors":"/js/plugins/contributors.js?time=1649216705815","message":"/js/thirdparty/message.js?time=1649216705815","search":"/js/search/hexo.js?time=1649216705815"},"css":{"style":"/css/style.css?time=1649216705815","message":"/css/message.css?time=1649216705815"}},
     default: {"avatar":"/media/placeholder/avatar/round/3442075.svg","link":"/media/placeholder/link/8f277b4ee0ecd.svg","cover":"/media/placeholder/cover/76b86c0226ffd.svg","image":"/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1649214964711),
+    lastupdate: new Date(1649216705815),
     sidebar: {
-      for_page: ["blogger","category","webinfo"],
+      for_page: ["blogger","category","webinfo","music"],
       for_post: ["toc"],
       webinfo: {
         lastupd: {
@@ -2126,7 +2128,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <!-- Custom Files head end-->
 </head>
   <body itemscope itemtype="http://schema.org/WebPage">
-    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow blur " style='opacity: 0' >
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -2395,7 +2397,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
       <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
-      <div id="half" class='cover-wrapper  dock' style="display: ;">
+      <div id="none" class='cover-wrapper post dock' style="display: none;">
         
   <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202204061030157.png"></div>
 
@@ -2470,22 +2472,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper">
           
 <div id="l_main" class=''>
-	
-		
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://lagrange1813.top/2022/04/06/hello-world/">
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://lagrange1813.top/2021/11/10/%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BE%8B%E8%AE%A9%E4%BD%A0%E7%90%86%E8%A7%A3Swift%E4%B9%8B%E7%BE%8E/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="Lagrange Point 的博客">
   </span>
@@ -2494,58 +2482,235 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <meta itemprop="description" content="Lagrange Point 的博客">
   </span>
   
-  
+
+
   
     <span hidden>
       <meta itemprop="image" content="/media/org.volantis/blog/favicon/android-chrome-192x192.png">
     </span>
   
-  
+  <div class="article-meta" id="top">
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2022/04/06/hello-world/"  itemprop="url">
-        Hello World
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
     
-      
-        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Qu...
-      
+    
+      <h1 class="title" itemprop="name headline">
+        一个用例让你理解Swift之美
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2021-11-10T12:50:48+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2021年11月10日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
     
   </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <h1 id="闭包表达式"><a href="#闭包表达式" class="headerlink" title="闭包表达式"></a>闭包表达式</h1><h2 id="Sorted-方法"><a href="#Sorted-方法" class="headerlink" title="Sorted 方法"></a>Sorted 方法</h2><div class="story post-story"><ul>
+<li>Swift 的标准库提供了一个叫做 <code>sorted(by:)</code> 的方法，会根据你提供的排序闭包将已知类型的数组的值进行排序</li>
+<li><code>sorted(by:)</code> 方法接收一个闭包，这个闭包接收两个与数组内容相同类型的实际参数，然后返回一个 <code>Bool</code> 值来说明第一个值在排序后应该出现在第二个值的前边还是后边，如果第一个值应该出现在第二个值_之前_ ，排序闭包需要返回 <code>true</code> ，否则返回 <code>false</code></li>
+</ul>
+</div><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><div class="story post-story"><p>使用 func 方法作为闭包，代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> names <span class="operator">=</span> [<span class="string">&quot;Chris&quot;</span>,<span class="string">&quot;Alex&quot;</span>,<span class="string">&quot;Ewa&quot;</span>,<span class="string">&quot;Barry&quot;</span>,<span class="string">&quot;Daniella&quot;</span>]</span><br><span class="line"><span class="keyword">func</span> <span class="title function_">backward</span>(<span class="keyword">_</span> <span class="params">s1</span>: <span class="type">String</span>, <span class="keyword">_</span> <span class="params">s2</span>: <span class="type">String</span>) -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> s1 <span class="operator">&gt;</span> s2</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> reversedNames <span class="operator">=</span> names.sorted(by: backward)</span><br><span class="line"><span class="comment">// reversedNames is equal to [&quot;Ewa&quot;, &quot;Daniella&quot;, &quot;Chris&quot;, &quot;Barry&quot;, &quot;Alex&quot;]</span></span><br></pre></td></tr></table></figure>
+<h3 id="闭包表达式语法"><a href="#闭包表达式语法" class="headerlink" title="闭包表达式语法"></a>闭包表达式语法</h3><p>这样来写本质上只是一个单一表达函数( a &gt; b )是非常啰嗦的，下面这个栗子展示一个之前 <code>backward(_:_:)</code> 函数的闭包表达版本：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">reversedNames <span class="operator">=</span> names.sorted(by: &#123; (s1: <span class="type">String</span>, s2: <span class="type">String</span>) -&gt; <span class="type">Bool</span> <span class="keyword">in</span></span><br><span class="line">    <span class="keyword">return</span> s1 <span class="operator">&gt;</span> s2</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>但我们更倾向于使用闭包表达式在行内写一个简单的闭包：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversedNames <span class="operator">=</span> names.sorted(by: &#123; (s1: <span class="type">String</span>, s2: <span class="type">String</span>) -&gt; <span class="type">Bool</span> <span class="keyword">in</span> <span class="keyword">return</span> s1 <span class="operator">&gt;</span> s2 &#125; )</span><br></pre></td></tr></table></figure>
+
+<h3 id="从语境中推断类型"><a href="#从语境中推断类型" class="headerlink" title="从语境中推断类型"></a>从语境中推断类型</h3><p><code>sorted(by:)</code> 方法是在字符串数组上调用的，所以它的形式参数必须是一个 <code>(String, String) -&gt; Bool</code> 类型的函数，因为所有的类型都能被推断，返回箭头 ( -&gt;) 和围绕在形式参数名周围的括号也能被省略：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversedNames <span class="operator">=</span> names.sorted(by: &#123; s1, s2 <span class="keyword">in</span> <span class="keyword">return</span> s1 <span class="operator">&gt;</span> s2 &#125; )</span><br></pre></td></tr></table></figure>
+<h3 id="从单表达式闭包隐式返回"><a href="#从单表达式闭包隐式返回" class="headerlink" title="从单表达式闭包隐式返回"></a>从单表达式闭包隐式返回</h3><p>单表达式闭包能够通过从它们的声明中删掉 return 关键字来隐式返回它们单个表达式的结果，所以前面的栗子可以写作：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversedNames <span class="operator">=</span> names.sorted(by: &#123; s1, s2 <span class="keyword">in</span> s1 <span class="operator">&gt;</span> s2 &#125; )</span><br></pre></td></tr></table></figure>
+<h3 id="简写的实际参数名"><a href="#简写的实际参数名" class="headerlink" title="简写的实际参数名"></a>简写的实际参数名</h3><p><code>Swift</code> 自动对行内闭包提供简写实际参数名，可以通过 $0 , $1 , $2 等名字来引用闭包的实际参数值，<code>in</code> 关键字也能被省略，因为闭包表达式完全由它的函数体组成：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversedNames <span class="operator">=</span> names.sorted(by: &#123; <span class="variable">$0</span> <span class="operator">&gt;</span> <span class="variable">$1</span> &#125; )</span><br></pre></td></tr></table></figure>
+<h3 id="运算符函数"><a href="#运算符函数" class="headerlink" title="运算符函数"></a>运算符函数</h3><p>实际上还有一种更简短的方式来撰写上述闭包表达式，Swift 的 <code>String</code> 类型定义了关于大于号（ <code>&gt;</code>）的特定字符串实现，让其作为一个有两个 <code>String</code> 类型形式参数的函数并返回一个 Bool 类型的值：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reversedNames <span class="operator">=</span> names.sorted(by: <span class="operator">&gt;</span>)</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>节选自<a target="_blank" rel="noopener" href="https://www.cnswift.org/">Swift 编程语言</a>，有删改</li>
+</ul>
+
+</div>
+  </div>
   
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2022-04-06T09:32:10+08:00">2022-04-06</time>
-        
-      </div>
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2022/04/06/hello-world/' itemprop="url">
-            阅读全文
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://lagrange1813.top/2021/11/10/%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BE%8B%E8%AE%A9%E4%BD%A0%E7%90%86%E8%A7%A3Swift%E4%B9%8B%E7%BE%8E/>http://lagrange1813.top/2021/11/10/%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BE%8B%E8%AE%A9%E4%BD%A0%E7%90%86%E8%A7%A3Swift%E4%B9%8B%E7%BE%8E/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2022-04-06T11:43:52+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2022年4月6日</p>
+  </a>
 </div>
 
-          </div>
         
       
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
-  </section>
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lagrange1813.top/2021/11/10/%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BE%8B%E8%AE%A9%E4%BD%A0%E7%90%86%E8%A7%A3Swift%E4%B9%8B%E7%BE%8E/&title=一个用例让你理解Swift之美 - Lagrange Point 的博客&summary=Swift 的标准库提供了一个叫做 sorted(by:) 的方法，会根据你提供的排序闭包将已知类型的数组的值进行排序。sorted(by:) 方法接收一个闭包，这个闭包接收两个与数组内容相同类型的实际参数，然后返回一个 Bool 值来说明第一个值在排序后应该出现在第二个值的前边还是后边，如果第一个值应该出现在第二个值之前 ，排序闭包需要返回 true ，否则返回 false 。"
+          
+          >
+          
+            <img src="/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://lagrange1813.top/2021/11/10/%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BE%8B%E8%AE%A9%E4%BD%A0%E7%90%86%E8%A7%A3Swift%E4%B9%8B%E7%BE%8E/&title=一个用例让你理解Swift之美 - Lagrange Point 的博客&summary=Swift 的标准库提供了一个叫做 sorted(by:) 的方法，会根据你提供的排序闭包将已知类型的数组的值进行排序。sorted(by:) 方法接收一个闭包，这个闭包接收两个与数组内容相同类型的实际参数，然后返回一个 Bool 值来说明第一个值在排序后应该出现在第二个值的前边还是后边，如果第一个值应该出现在第二个值之前 ，排序闭包需要返回 true ，否则返回 false 。"
+          
+          >
+          
+            <img src="/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://lagrange1813.top/2021/11/10/%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BE%8B%E8%AE%A9%E4%BD%A0%E7%90%86%E8%A7%A3Swift%E4%B9%8B%E7%BE%8E/&title=一个用例让你理解Swift之美 - Lagrange Point 的博客&summary=Swift 的标准库提供了一个叫做 sorted(by:) 的方法，会根据你提供的排序闭包将已知类型的数组的值进行排序。sorted(by:) 方法接收一个闭包，这个闭包接收两个与数组内容相同类型的实际参数，然后返回一个 Bool 值来说明第一个值在排序后应该出现在第二个值的前边还是后边，如果第一个值应该出现在第二个值之前 ，排序闭包需要返回 true ，否则返回 false 。"
+          
+          >
+          
+            <img src="/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
   
+  
+
+  
+    <div class="prev-next">
+      
+        <a class='prev' href='/2021/11/23/iOS%2014%20Updates%20in%20UIKit/'>
+          <p class='title'><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>iOS 14 Updates in UIKit</p>
+          <p class='content'>iOS14 Updates in UIKit原帖地址：New in iOS 14: ColorPicker, DatePicker, Menus and Actions
+ColorPicker,...</p>
+        </a>
+      
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+  
+  <article class="post white-box reveal shadow" id="comments">
+    <span hidden>
+      <meta itemprop="discussionUrl" content="/2021/11/10/%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BE%8B%E8%AE%A9%E4%BD%A0%E7%90%86%E8%A7%A3Swift%E4%B9%8B%E7%BE%8E/index.html#comments">
+    </span>
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
     
+    
+    <div id="layoutHelper-comments"></div>
+
+  </article>
   
 
 
-	
+
+
+
 </div>
 <aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
   
@@ -2553,141 +2718,34 @@ Qu...
     
     
 
-<section class="widget blogger shadow desktop mobile pjax">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://cdn.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202204061050198.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">Lagrange Point 的博客</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fa-solid fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fa-solid fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/volantis-x/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fa-solid fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
 
-  
+  <section class="widget toc-wrapper shadow desktop mobile pjax" id="toc-div" >
     
-    
-
-  
-
-  
-    
-    
-
-<section class="widget shadow desktop pjax">
-  
   <header>
     
-      <i class="fa-solid fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>1 篇</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>已运行时间：</div>
-          <div id="webinfo-runtime-count"></div>
-        </div>
-      
-
-
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站访客数：</div>
-          
-          <div><span id="lc-uv"><span id='number'><i class="fa-solid fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 人</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站总访问量：</div>
-          
-          <div><span id="lc-sv"><span id='number'><i class="fa-solid fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 次</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          <div id="last-update-show">2022-04-06 日</div> 
-        </div>
-      
+    <div class='content'>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sorted-%E6%96%B9%E6%B3%95"><span class="toc-text">Sorted 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%97%AD%E5%8C%85%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E6%B3%95"><span class="toc-text">闭包表达式语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E8%AF%AD%E5%A2%83%E4%B8%AD%E6%8E%A8%E6%96%AD%E7%B1%BB%E5%9E%8B"><span class="toc-text">从语境中推断类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%8D%95%E8%A1%A8%E8%BE%BE%E5%BC%8F%E9%97%AD%E5%8C%85%E9%9A%90%E5%BC%8F%E8%BF%94%E5%9B%9E"><span class="toc-text">从单表达式闭包隐式返回</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%86%99%E7%9A%84%E5%AE%9E%E9%99%85%E5%8F%82%E6%95%B0%E5%90%8D"><span class="toc-text">简写的实际参数名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E5%87%BD%E6%95%B0"><span class="toc-text">运算符函数</span></a></li></ol></li></ol>
     </div>
-  </div>
-</section>
+  </section>
 
   
 
 
 <!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
 
   <div class="pjax">
     <!-- pjax占位 -->
@@ -2716,14 +2774,15 @@ Qu...
 </aside>
 
 
+
           <!--此文件用来存放一些不方便取值的变量-->
 <!--思路大概是将值藏到重加载的区域内-->
 
 <pjax>
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="一个用例让你理解Swift之美";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -2732,14 +2791,14 @@ Qu...
     // header
     var l_header=document.getElementById("l_header");
     
-    l_header.classList.remove("show");
+    l_header.classList.add("show");
     
     
       // cover
       var cover_wrapper=document.querySelector('#l_cover .cover-wrapper');
       var scroll_down=document.getElementById('scroll-down');
-      cover_wrapper.id="half";
-      cover_wrapper.style.display="";
+      cover_wrapper.id="none";
+      cover_wrapper.style.display="none";
       scroll_down.style.display="none";
     
   
@@ -2833,7 +2892,7 @@ Qu...
 
 <!-- internal -->
 
-<script src="/js/app.js?time=1649214964711.js"></script>
+<script src="/js/app.js?time=1649216705815.js"></script>
 
 
 
@@ -3025,7 +3084,7 @@ Qu...
       
     </ul>
   </div>
-  <script>volantis.js('/js/plugins/rightMenu.js?time=1649214964711')</script>
+  <script>volantis.js('/js/plugins/rightMenu.js?time=1649216705815')</script>
 
 
 
@@ -3038,19 +3097,19 @@ Qu...
     
       const sites_api = document.getElementById('sites-api');
       if (sites_api != undefined && typeof SitesJS === 'undefined') {
-        volantis.js("/js/plugins/sites.js?time=1649214964711")
+        volantis.js("/js/plugins/sites.js?time=1649216705815")
       }
     
     
       const friends_api = document.getElementById('friends-api');
       if (friends_api != undefined && typeof FriendsJS === 'undefined') {
-        volantis.js("/js/plugins/friends.js?time=1649214964711")
+        volantis.js("/js/plugins/friends.js?time=1649216705815")
       }
     
     
       const contributors_api = document.getElementById('contributors-api');
       if (contributors_api != undefined && typeof ContributorsJS === 'undefined') {
-        volantis.js("/js/plugins/contributors.js?time=1649214964711")
+        volantis.js("/js/plugins/contributors.js?time=1649216705815")
       }
     
   };
@@ -3175,7 +3234,7 @@ Qu...
 
   function loadSearchScript() {
     // see: layout/_partial/scripts/_ctrl/cdnCtrl.ejs
-    return volantis.js("/js/search/hexo.js?time=1649214964711");
+    return volantis.js("/js/search/hexo.js?time=1649216705815");
   }
 
   function loadSearchService() {
@@ -3466,7 +3525,7 @@ Qu...
 
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","logo":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/","sameAs":["https://github.com/volantis-x"],"description":"Lagrange Point 的博客"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://lagrange1813.top/","name":"Lagrange Point 的博客"}},{"@type":"ListItem","position":2,"item":{"@id":"http://lagrange1813.top/archives/","name":"Archive"}},{"@type":"ListItem","position":3,"item":{"@id":"http://lagrange1813.top/archives/2022/","name":"2022年"}},{"@type":"ListItem","position":4,"item":{"@id":"http://lagrange1813.top/archives/2022/4/","name":"4月"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","keywords":null,"description":"Lagrange Point 的博客","author":{"@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/","description":"Lagrange Point 的博客"},"publisher":{"@type":"Organization","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","logo":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://lagrange1813.top?s={search_term_string}"},"query-input":"required name=search_term_string"}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","logo":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/","sameAs":["https://github.com/volantis-x"],"description":"Lagrange Point 的博客"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://lagrange1813.top/","name":"Lagrange Point 的博客"}},{"@type":"ListItem","position":3,"item":{"@id":"http://lagrange1813.top/2021/11/10/一个用例让你理解Swift之美/","name":"一个用例让你理解Swift之美"}}]},{"@context":"http://schema.org","@type":"BlogPosting","headline":"一个用例让你理解Swift之美","description":"Swift 的标准库提供了一个叫做 sorted(by:) 的方法，会根据你提供的排序闭包将已知类型的数组的值进行排序。sorted(by:) 方法接收一个闭包，这个闭包接收两个与数组内容相同类型的实际参数，然后返回一个 Bool 值来说明第一个值在排序后应该出现在第二个值的前边还是后边，如果第一个值应该出现在第二个值之前 ，排序闭包需要返回 true ，否则返回 false 。","datePublished":"2021-11-10T04:50:48.000Z","dateModified":"2022-04-06T03:43:52.731Z","inLanguage":["zh-CN","en","zh-HK","zh-TW","default"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://lagrange1813.top/2021/11/10/%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BE%8B%E8%AE%A9%E4%BD%A0%E7%90%86%E8%A7%A3Swift%E4%B9%8B%E7%BE%8E/"},"author":{"@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/"},"publisher":{"@type":"Organization","name":"Lagrange Point 的博客","logo":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://lagrange1813.top/2021/11/10/%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BE%8B%E8%AE%A9%E4%BD%A0%E7%90%86%E8%A7%A3Swift%E4%B9%8B%E7%BE%8E/","wordCount":191,"image":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 <!-- more -->
