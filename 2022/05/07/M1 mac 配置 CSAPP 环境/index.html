@@ -4,8 +4,8 @@
   <meta name="generator" content="Hexo 6.1.0">
   <meta charset="utf-8">
   <!-- SEO相关 -->
-  <meta name="robots" content="noindex,follow">
-  <link rel="canonical" href="http://lagrange1813.top/archives/"/>
+  
+  <link rel="canonical" href="http://lagrange1813.top/2022/05/07/m1 mac 配置 csapp 环境/"/>
   <!-- 渲染优化 -->
   <!-- <meta http-equiv='x-dns-prefetch-control' content='on' />
   <link rel='dns-prefetch' href='https://cdn.jsdelivr.net'>
@@ -26,16 +26,18 @@
 <link rel="preload" href="/media/fonts/UbuntuMono/UbuntuMono-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
   <!-- 页面元数据 -->
-  <title>归档 - Lagrange Point 的博客</title>
+  <title>M1 mac 配置 CSAPP Lab 环境 - Lagrange Point 的博客</title>
   <meta name="keywords" content="null">
-  <meta name="description" content="Lagrange Point 的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lagrange Point 的博客">
-<meta property="og:url" content="http://lagrange1813.top/archives/index.html">
+  <meta name="description" content="在 Docker 官网 下载 Apple Chip 版的 Docker。Lab的目标程序是32位的程序，而 Docker 默认创建的是 arm 架构的 CentOS，如果没有指定为 amd64 ，将无法完成编译。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="M1 mac 配置 CSAPP Lab 环境">
+<meta property="og:url" content="http://lagrange1813.top/2022/05/07/M1%20mac%20%E9%85%8D%E7%BD%AE%20CSAPP%20%E7%8E%AF%E5%A2%83/index.html">
 <meta property="og:site_name" content="Lagrange Point 的博客">
-<meta property="og:description" content="Lagrange Point 的博客">
+<meta property="og:description" content="在 Docker 官网 下载 Apple Chip 版的 Docker。Lab的目标程序是32位的程序，而 Docker 默认创建的是 arm 架构的 CentOS，如果没有指定为 amd64 ，将无法完成编译。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://lagrange1813.top/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2022-05-07T06:17:48.000Z">
+<meta property="article:modified_time" content="2022-05-07T06:17:11.535Z">
 <meta property="article:author" content="Lagrange1813">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://lagrange1813.top/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -2010,7 +2012,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   <!-- Custom Files head end-->
 </head>
   <body itemscope itemtype="http://schema.org/WebPage">
-    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow blur " style='opacity: 0' >
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -2279,7 +2281,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
       <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
-      <div id="half" class='cover-wrapper  search' style="display: ;">
+      <div id="none" class='cover-wrapper post search' style="display: none;">
         
   <div class='cover-bg lazyload placeholder' data-bg="https://cdn.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202204061202350.jpg"></div>
 
@@ -2343,82 +2345,286 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper">
           
 <div id="l_main" class=''>
-	
-	  <article id="arc" class="post article white-box reveal shadow">
-			
-			
-				
-				
-					
-						
-						<h2>2022</h2>
-					
-						<div class='timenode'>
-								<a class="meta" href="/2022/05/07/M1%20mac%20%E9%85%8D%E7%BD%AE%20CSAPP%20%E7%8E%AF%E5%A2%83/">
-									<time>05-07</time>
-									
-										M1 mac 配置 CSAPP Lab 环境
-									
-									
-									
-									
-								</a>
-						</div>
-				
-			
-				
-				
-					
-						<div class='timenode'>
-								<a class="meta" href="/2022/04/07/%E8%B5%84%E6%BA%90/">
-									<time>04-07</time>
-									
-										资源
-									
-									
-									
-									
-								</a>
-						</div>
-				
-			
-				
-				
-					
-						
-						<h2>2021</h2>
-					
-						<div class='timenode'>
-								<a class="meta" href="/2021/11/23/iOS%2014%20Updates%20in%20UIKit/">
-									<time>11-23</time>
-									
-										iOS 14 Updates in UIKit
-									
-									
-									
-									
-								</a>
-						</div>
-				
-			
-				
-				
-					
-						<div class='timenode'>
-								<a class="meta" href="/2021/11/10/%E4%B8%80%E4%B8%AA%E7%94%A8%E4%BE%8B%E8%AE%A9%E4%BD%A0%E7%90%86%E8%A7%A3Swift%E4%B9%8B%E7%BE%8E/">
-									<time>11-10</time>
-									
-										一个用例让你理解Swift之美
-									
-									
-									
-									
-								</a>
-						</div>
-				
-			
-	  </article>
-	
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://lagrange1813.top/2022/05/07/M1%20mac%20%E9%85%8D%E7%BD%AE%20CSAPP%20%E7%8E%AF%E5%A2%83/">
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Lagrange Point 的博客">
+  </span>
+  <span hidden itemprop="post" itemscope itemtype="http://schema.org/Post">
+    <meta itemprop="name" content="Lagrange Point 的博客">
+    <meta itemprop="description" content="Lagrange Point 的博客">
+  </span>
+  
+
+
+  
+    <span hidden>
+      <meta itemprop="image" content="/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+    </span>
+  
+  <div class="article-meta" id="top">
+    
+    
+    
+      <h1 class="title" itemprop="name headline">
+        M1 mac 配置 CSAPP Lab 环境
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">请设置文章作者</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2022-05-07T14:17:48+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2022年5月7日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
+    
+  </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <h1 id="M1-mac-配置-CSAPP-Lab-环境"><a href="#M1-mac-配置-CSAPP-Lab-环境" class="headerlink" title="M1 mac 配置 CSAPP Lab 环境"></a>M1 mac 配置 CSAPP Lab 环境</h1><h3 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h3><p>在 <a target="_blank" rel="noopener" href="https://www.docker.com/get-started/">Docker 官网</a> 下载 Apple Chip 版的 Docker。</p>
+<h3 id="获取镜像"><a href="#获取镜像" class="headerlink" title="获取镜像"></a>获取镜像</h3><p>Lab的目标程序是32位的程序，但如下图所示，</p>
+<div align="center"><img src="https://cdn.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202205071340112.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202205071340112.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="600px"/></div>
+
+<p>而 Docker 默认创建的是 arm 架构的 CentOS，如果没有指定为 amd64 ，将无法完成编译。</p>
+<h3 id="下载-Linux-x64-镜像"><a href="#下载-Linux-x64-镜像" class="headerlink" title="下载 Linux x64 镜像"></a>下载 Linux x64 镜像</h3><p>由于我们需要的是 x64 架构的镜像，因此我们不能使用默认的 <code>docker pull ubuntu</code> 来拉取镜像，因为它会默认拉取和我们主机架构一样的镜像。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker pull --help</span><br><span class="line"></span><br><span class="line">Usage:  docker pull [OPTIONS] NAME[:TAG|@DIGEST]</span><br><span class="line"></span><br><span class="line">Pull an image or a repository from a registry</span><br><span class="line"></span><br><span class="line">Options:</span><br><span class="line">  -a, --all-tags                Download all tagged images in the repository</span><br><span class="line">      --disable-content-trust   Skip image verification (default true)</span><br><span class="line">      --platform string         Set platform if server is multi-platform</span><br><span class="line">                                capable</span><br><span class="line">  -q, --quiet                   Suppress verbose output</span><br></pre></td></tr></table></figure>
+
+<p>我们在 Docker hub 中找到相应的 <a target="_blank" rel="noopener" href="https://hub.docker.com/_/ubuntu?tab=tags">Ubuntu x64</a> 镜像，找到最新的镜像，复制它的DIGEST（可能和下图不一致）</p>
+<div align="center"><img src="https://cdn.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202205071346868.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202205071346868.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="600px"/></div>
+
+<p>然后使用如下命令 pull 指定的架构：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 将&#x27;@&#x27;后值改为刚才复制的</span><br><span class="line">docker pull ubuntu@sha256:aa6c2c047467afc828e77e306041b7fa4a65734fe3449a54aa9c280822b0d87d</span><br></pre></td></tr></table></figure>
+
+<p>这样我们就 pull 下来了一个 x64 的 Ubuntu 镜像。</p>
+<h3 id="查看镜像"><a href="#查看镜像" class="headerlink" title="查看镜像"></a>查看镜像</h3><p>使用命令 <code>docker images</code> 查看下载到本地的镜像：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker images</span><br><span class="line">REPOSITORY   TAG       IMAGE ID       CREATED      SIZE</span><br><span class="line">ubuntu       &lt;none&gt;    d2e4e1f51132   7 days ago   77.8MB</span><br></pre></td></tr></table></figure>
+
+<p>我们需要关注的是镜像的ID：d2e4e1f51132。</p>
+<h3 id="创建容器"><a href="#创建容器" class="headerlink" title="创建容器"></a>创建容器</h3><p>我们使用 <code>docker run</code> 来运行镜像：</p>
+<p><code>docker run -itd --name ubuntu_test -p 2345:22 -v ~/Fundamental/CSAPP:/root/csapp d2</code></p>
+<ul>
+<li><code>ubuntu_test</code> 为容器名，可任意修改</li>
+<li><code>-p</code> 指令指定容器映射的端口，两个值可自行更改</li>
+<li><code>-v</code> 指令指定挂载的目录，前者为本机目录，后者为容器内相应的目录，同样可自行更改</li>
+<li><code>d2</code> 表示的是 <code>IMAGE ID d2e4e1f51132</code> ，不引起歧义的情况下可以简写前缀</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker run -itd --name ubuntu_test -p 2345:22 -v ~/Fundamental/CSAPP:/root/csapp d2</span><br><span class="line">WARNING: The requested image&#x27;s platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested</span><br><span class="line">e35e50f5b3fd809285924c570e84b88098babe68e9f565fc8e9da7127e6b9172</span><br></pre></td></tr></table></figure>
+
+<p>最后一行返回的是容器 ID 。使用 <code>docker ps</code> 查看运行中的容器：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ docker ps</span><br><span class="line">CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS          PORTS                  NAMES</span><br><span class="line">e35e50f5b3fd   d2        &quot;bash&quot;    32 minutes ago   Up 32 minutes   0.0.0.0:2345-&gt;22/tcp   ubuntu_csapp</span><br></pre></td></tr></table></figure>
+
+<h3 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h3><div align="center"><img src="https://cdn.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202205071400007.png" class="lazyload" data-srcset="https://cdn.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202205071400007.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="800px"/></div>
+
+<p>点击 CLI 按钮进入容器。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Last login: Sat May  7 13:57:35 on ttys005</span><br><span class="line">docker exec -it e35e50f5b3fd809285924c570e84b88098babe68e9f565fc8e9da7127e6b9172 /bin/sh</span><br><span class="line">➜  ~ docker exec -it e35e50f5b3fd809285924c570e84b88098babe68e9f565fc8e9da7127e6</span><br><span class="line">b9172 /bin/sh</span><br><span class="line">#</span><br></pre></td></tr></table></figure>
+
+<h3 id="下载必要组件"><a href="#下载必要组件" class="headerlink" title="下载必要组件"></a>下载必要组件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># apt-get update</span><br><span class="line"># apt-get upgrade</span><br><span class="line"># apt-get install vim</span><br><span class="line"># apt-get install openssh-server</span><br></pre></td></tr></table></figure>
+
+<p>设置一个 root 密码:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># passwd </span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># vim /etc/ssh/sshd_config</span><br></pre></td></tr></table></figure>
+
+<p>注释这一行 <strong>PermitRootLogin prohibit-password</strong> ，<br>添加一行 **PermitRootLogin yes **。</p>
+<p>:wq 保存退出。</p>
+<p>重启ssh服务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># /etc/init.d/ssh restart</span><br><span class="line"> * Restarting OpenBSD Secure Shell server sshd</span><br></pre></td></tr></table></figure>
+
+<p>本机连接ssh</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># ssh root@0.0.0.0 -p 2345</span><br></pre></td></tr></table></figure>
+
+<p>然后输入密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ ssh root@0.0.0.0 -p 2345</span><br><span class="line">The authenticity of host &#x27;[0.0.0.0]:2345 ([0.0.0.0]:2345)&#x27; can&#x27;t be established.</span><br><span class="line">ED25519 key fingerprint is SHA256:qkyFoNEIEzJP08w8gmt8LQOd2wtA5na13nF2nfmGCfg.</span><br><span class="line">This key is not known by any other names</span><br><span class="line">Are you sure you want to continue connecting (yes/no/[fingerprint])? y</span><br><span class="line">Please type &#x27;yes&#x27;, &#x27;no&#x27; or the fingerprint: yes</span><br><span class="line">Warning: Permanently added &#x27;[0.0.0.0]:2345&#x27; (ED25519) to the list of known hosts.</span><br><span class="line">root@0.0.0.0&#x27;s password:</span><br><span class="line">Welcome to Ubuntu 22.04 LTS (GNU/Linux 5.10.104-linuxkit x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https://help.ubuntu.com</span><br><span class="line"> * Management:     https://landscape.canonical.com</span><br><span class="line"> * Support:        https://ubuntu.com/advantage</span><br><span class="line"></span><br><span class="line">This system has been minimized by removing packages and content that are</span><br><span class="line">not required on a system that users do not log into.</span><br><span class="line"></span><br><span class="line">To restore this content, you can run the &#x27;unminimize&#x27; command.</span><br><span class="line"></span><br><span class="line">The programs included with the Ubuntu system are free software;</span><br><span class="line">the exact distribution terms for each program are described in the</span><br><span class="line">individual files in /usr/share/doc/*/copyright.</span><br><span class="line"></span><br><span class="line">Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by</span><br><span class="line">applicable law.</span><br></pre></td></tr></table></figure>
+
+<p>如果结果如上所示，那么容器已经创建成功。</p>
+<p>开始实验吧。</p>
+<hr>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://genlz.com/archives/shi-yong-dockerwithm1chip-mo-ni-linuxx64-huan-jing">https://genlz.com/archives/shi-yong-dockerwithm1chip-mo-ni-linuxx64-huan-jing</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43914736/article/details/90608587">https://blog.csdn.net/qq_43914736/article/details/90608587</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7071467499564302349">https://juejin.cn/post/7071467499564302349</a></li>
+</ul>
+
+
+  </div>
+  
+  
+    
+    <div class='footer'>
+      
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://lagrange1813.top/2022/05/07/M1%20mac%20%E9%85%8D%E7%BD%AE%20CSAPP%20%E7%8E%AF%E5%A2%83/>http://lagrange1813.top/2022/05/07/M1%20mac%20%E9%85%8D%E7%BD%AE%20CSAPP%20%E7%8E%AF%E5%A2%83/</a></p>
+              
+            
+          </blockquote>
+        </div>
+      
+      
+    </div>
+  
+  
+    
+
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2022-05-07T14:17:11+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2022年5月7日</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lagrange1813.top/2022/05/07/M1%20mac%20%E9%85%8D%E7%BD%AE%20CSAPP%20%E7%8E%AF%E5%A2%83/&title=M1 mac 配置 CSAPP Lab 环境 - Lagrange Point 的博客&summary=在 Docker 官网 下载 Apple Chip 版的 Docker。Lab的目标程序是32位的程序，而 Docker 默认创建的是 arm 架构的 CentOS，如果没有指定为 amd64 ，将无法完成编译。"
+          
+          >
+          
+            <img src="/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://lagrange1813.top/2022/05/07/M1%20mac%20%E9%85%8D%E7%BD%AE%20CSAPP%20%E7%8E%AF%E5%A2%83/&title=M1 mac 配置 CSAPP Lab 环境 - Lagrange Point 的博客&summary=在 Docker 官网 下载 Apple Chip 版的 Docker。Lab的目标程序是32位的程序，而 Docker 默认创建的是 arm 架构的 CentOS，如果没有指定为 amd64 ，将无法完成编译。"
+          
+          >
+          
+            <img src="/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://lagrange1813.top/2022/05/07/M1%20mac%20%E9%85%8D%E7%BD%AE%20CSAPP%20%E7%8E%AF%E5%A2%83/&title=M1 mac 配置 CSAPP Lab 环境 - Lagrange Point 的博客&summary=在 Docker 官网 下载 Apple Chip 版的 Docker。Lab的目标程序是32位的程序，而 Docker 默认创建的是 arm 架构的 CentOS，如果没有指定为 amd64 ，将无法完成编译。"
+          
+          >
+          
+            <img src="/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2022/04/07/%E8%B5%84%E6%BA%90/'>
+          <p class='title'>资源<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>资源列表
+</p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
+  
+
+  
+  <article class="post white-box reveal shadow" id="comments">
+    <span hidden>
+      <meta itemprop="discussionUrl" content="/2022/05/07/M1%20mac%20%E9%85%8D%E7%BD%AE%20CSAPP%20%E7%8E%AF%E5%A2%83/index.html#comments">
+    </span>
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
+    
+    
+    <div id="layoutHelper-comments"></div>
+
+  </article>
+  
+
+
+
+
+
 </div>
 <aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
   
@@ -2426,177 +2632,34 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
 
-<section class="widget blogger shadow desktop mobile pjax">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://cdn.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202204061050198.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">Lagrange Point 的博客</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fa-solid fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fa-solid fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/volantis-x/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fa-solid fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
 
-  
-    
-    
-  
-
-  <section class="widget category shadow desktop pjax">
+  <section class="widget toc-wrapper shadow desktop mobile pjax" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/UIKit/" href="/categories/UIKit/"
-            active-action="action-categoriesUIKit"
-            ><div class='name'>UIKit</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/UIKit/%E6%9D%82%E8%B0%88/" href="/categories/UIKit/%E6%9D%82%E8%B0%88/"
-            active-action="action-categoriesUIKitE69D82E8B088"
-            ><div class='name'>杂谈</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Docker"><span class="toc-text">安装 Docker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E9%95%9C%E5%83%8F"><span class="toc-text">获取镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD-Linux-x64-%E9%95%9C%E5%83%8F"><span class="toc-text">下载 Linux x64 镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E9%95%9C%E5%83%8F"><span class="toc-text">查看镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AE%B9%E5%99%A8"><span class="toc-text">创建容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%85%A5%E5%AE%B9%E5%99%A8"><span class="toc-text">进入容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD%E5%BF%85%E8%A6%81%E7%BB%84%E4%BB%B6"><span class="toc-text">下载必要组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol>
     </div>
   </section>
-
-
-  
-
-  
-    
-    
-
-<section class="widget shadow desktop pjax">
-  
-  <header>
-    
-      <i class="fa-solid fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>4 篇</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>已运行时间：</div>
-          <div id="webinfo-runtime-count"></div>
-        </div>
-      
-
-
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站访客数：</div>
-          
-          <div><span id="lc-uv"><span id='number'><i class="fa-solid fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 人</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站总访问量：</div>
-          
-          <div><span id="lc-sv"><span id='number'><i class="fa-solid fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 次</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          <div id="last-update-show">2022-05-07 日</div> 
-        </div>
-      
-    </div>
-  </div>
-</section>
-
-  
-
-  
-    
-    
-
-
 
   
 
 
 <!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
 
   <div class="pjax">
     <!-- pjax占位 -->
@@ -2625,14 +2688,15 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </aside>
 
 
+
           <!--此文件用来存放一些不方便取值的变量-->
 <!--思路大概是将值藏到重加载的区域内-->
 
 <pjax>
 <script>
   window.pdata={}
-  pdata.ispage=false;
-  pdata.postTitle="";
+  pdata.ispage=true;
+  pdata.postTitle="M1 mac 配置 CSAPP Lab 环境";
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -2641,14 +2705,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     // header
     var l_header=document.getElementById("l_header");
     
-    l_header.classList.remove("show");
+    l_header.classList.add("show");
     
     
       // cover
       var cover_wrapper=document.querySelector('#l_cover .cover-wrapper');
       var scroll_down=document.getElementById('scroll-down');
-      cover_wrapper.id="half";
-      cover_wrapper.style.display="";
+      cover_wrapper.id="none";
+      cover_wrapper.style.display="none";
       scroll_down.style.display="none";
     
   
@@ -3375,7 +3439,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","logo":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/","sameAs":["https://github.com/volantis-x"],"description":"Lagrange Point 的博客"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://lagrange1813.top/","name":"Lagrange Point 的博客"}},{"@type":"ListItem","position":2,"item":{"@id":"http://lagrange1813.top/archives/","name":"Archive"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","keywords":null,"description":"Lagrange Point 的博客","author":{"@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/","description":"Lagrange Point 的博客"},"publisher":{"@type":"Organization","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","logo":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://lagrange1813.top?s={search_term_string}"},"query-input":"required name=search_term_string"}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","logo":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/","sameAs":["https://github.com/volantis-x"],"description":"Lagrange Point 的博客"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://lagrange1813.top/","name":"Lagrange Point 的博客"}},{"@type":"ListItem","position":3,"item":{"@id":"http://lagrange1813.top/2022/05/07/M1 mac 配置 CSAPP 环境/","name":"M1 mac 配置 CSAPP Lab 环境"}}]},{"@context":"http://schema.org","@type":"BlogPosting","headline":"M1 mac 配置 CSAPP Lab 环境","description":"在 Docker 官网 下载 Apple Chip 版的 Docker。Lab的目标程序是32位的程序，而 Docker 默认创建的是 arm 架构的 CentOS，如果没有指定为 amd64 ，将无法完成编译。","datePublished":"2022-05-07T06:17:48.000Z","dateModified":"2022-05-07T06:17:11.535Z","inLanguage":["zh-CN","en","zh-HK","zh-TW","default"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://lagrange1813.top/2022/05/07/M1%20mac%20%E9%85%8D%E7%BD%AE%20CSAPP%20%E7%8E%AF%E5%A2%83/"},"author":{"@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/"},"publisher":{"@type":"Organization","name":"Lagrange Point 的博客","logo":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://lagrange1813.top/2022/05/07/M1%20mac%20%E9%85%8D%E7%BD%AE%20CSAPP%20%E7%8E%AF%E5%A2%83/","wordCount":106,"image":{"@type":"ImageObject","url":"/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 <!-- more -->
