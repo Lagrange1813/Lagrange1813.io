@@ -32,19 +32,19 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>Lagrange Point 的博客</title>
+  <title>关于 iOS 中状态管理的完整指南 - Lagrange Point 的博客</title>
   <meta name="keywords" content="null">
-  <meta desc name="description" content="Lagrange Point 的博客 - Lagrange1813 - Lagrange Point 的博客">
+  <meta desc name="description" content="软件开发存在许多挑战，但有一种野兽往往比其他野兽更频繁地把事情搞砸：应用程序的状态管理和数据传播问题。那么，状态会出什么问题，尽管它只是用于读写的数据？ - Lagrange1813 - Lagrange Point 的博客">
   
 <meta property="og:type" content="article">
-<meta property="og:title" content="Lagrange Point 的博客">
+<meta property="og:title" content="关于 iOS 中状态管理的完整指南">
 <meta property="og:url" content="http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/index.html">
 <meta property="og:site_name" content="Lagrange Point 的博客">
-<meta property="og:description" content="原文 The Complete Guide to the State Management in iOS - Alexey Naumov (nalexn.github.io) 本指南深入探讨了基于 UIKit 的生产应用程序的状态管理设计。SwiftUI 在这方面改变了游戏规则；然而，即使对于新的苹果UI框架，本文中的大多数概念和陈述仍然适用。[这些](Understanding SwiftUI">
+<meta property="og:description" content="软件开发存在许多挑战，但有一种野兽往往比其他野兽更频繁地把事情搞砸：应用程序的状态管理和数据传播问题。那么，状态会出什么问题，尽管它只是用于读写的数据？">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png">
-<meta property="article:published_time" content="2022-06-16T03:40:04.499Z">
-<meta property="article:modified_time" content="2022-06-16T05:58:36.806Z">
+<meta property="article:published_time" content="2022-06-16T06:01:01.000Z">
+<meta property="article:modified_time" content="2022-06-16T06:01:58.116Z">
 <meta property="article:author" content="Lagrange1813">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png">
@@ -1796,7 +1796,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     debug: false,
     cdn: {"js":{"app":"/js/app.fda82528.js","parallax":"/js/plugins/parallax.8bf0ab10.js","rightMenu":"/js/plugins/rightMenu.d9437285.js","rightMenus":"/js/plugins/rightMenus.cd02aa19.js","sites":"/js/plugins/tags/sites.76bf19b8.js","friends":"/js/plugins/tags/friends.f372da57.js","contributors":"/js/plugins/tags/contributors.aec80453.js","search":"/js/search/hexo.0e52f222.js"},"css":{"style":"/css/style.f98ffeb8.css"}},
     default: {"avatar":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/placeholder/avatar/round/3442075.svg","link":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/placeholder/link/8f277b4ee0ecd.svg","cover":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/placeholder/cover/76b86c0226ffd.svg","image":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/placeholder/image/2659360.svg"},
-    lastupdate: new Date(1655359150046),
+    lastupdate: new Date(1655359338318),
     sidebar: {
       for_page: ["blogger","category","webinfo","music"],
       for_post: ["toc"],
@@ -2576,9 +2576,57 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
     
-      <span hidden itemprop="name headline">
+      <h1 class="title" itemprop="name headline">
+        关于 iOS 中状态管理的完整指南
+      </h1>
+      <div class='new-meta-box'>
         
-      </span>
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">Lagrange</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2022-06-16T14:01:01+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2022年6月16日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="关于 iOS 中状态管理的完整指南" data-path="/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
+        <i class="fa-solid fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fa-solid fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
     
   </div>
 
@@ -2712,7 +2760,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateModified" datetime="2022-06-16T13:58:36+08:00">
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2022-06-16T14:01:58+08:00">
   <a class='notlink'>
     <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：2022年6月16日</p>
@@ -2734,7 +2782,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/&title= - Lagrange Point 的博客&summary="
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/&title=关于 iOS 中状态管理的完整指南 - Lagrange Point 的博客&summary=软件开发存在许多挑战，但有一种野兽往往比其他野兽更频繁地把事情搞砸：应用程序的状态管理和数据传播问题。那么，状态会出什么问题，尽管它只是用于读写的数据？"
           
           >
           
@@ -2746,7 +2794,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/&title= - Lagrange Point 的博客&summary="
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/&title=关于 iOS 中状态管理的完整指南 - Lagrange Point 的博客&summary=软件开发存在许多挑战，但有一种野兽往往比其他野兽更频繁地把事情搞砸：应用程序的状态管理和数据传播问题。那么，状态会出什么问题，尽管它只是用于读写的数据？"
           
           >
           
@@ -2758,7 +2806,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
           
-          target="_blank" href="http://service.weibo.com/share/share.php?url=http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/&title= - Lagrange Point 的博客&summary="
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/&title=关于 iOS 中状态管理的完整指南 - Lagrange Point 的博客&summary=软件开发存在许多挑战，但有一种野兽往往比其他野兽更频繁地把事情搞砸：应用程序的状态管理和数据传播问题。那么，状态会出什么问题，尽管它只是用于读写的数据？"
           
           >
           
@@ -2897,7 +2945,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 <pjax>
 <script>
   window.pdata={}
-  pdata.ispage=false;
+  pdata.ispage=true;
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -4379,7 +4427,7 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","logo":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/","sameAs":["https://github.com/volantis-x"],"description":"Lagrange Point 的博客"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://lagrange1813.top/","name":"Lagrange Point 的博客"}},{"@type":"ListItem","position":3,"item":{"@id":"http://lagrange1813.top/2022/06/16/关于 iOS 中状态管理的完整指南/","name":""}}]},{"@context":"http://schema.org","@type":"BlogPosting","headline":"","description":"","datePublished":"2022-06-16T03:40:04.499Z","dateModified":"2022-06-16T05:58:36.806Z","inLanguage":["zh-CN","en","zh-HK","zh-TW","default"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/"},"author":{"@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/"},"publisher":{"@type":"Organization","name":"Lagrange Point 的博客","logo":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/","wordCount":0,"image":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","logo":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/","sameAs":["https://github.com/volantis-x"],"description":"Lagrange Point 的博客"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://lagrange1813.top/","name":"Lagrange Point 的博客"}},{"@type":"ListItem","position":3,"item":{"@id":"http://lagrange1813.top/2022/06/16/关于 iOS 中状态管理的完整指南/","name":"关于 iOS 中状态管理的完整指南"}}]},{"@context":"http://schema.org","@type":"BlogPosting","headline":"关于 iOS 中状态管理的完整指南","description":"软件开发存在许多挑战，但有一种野兽往往比其他野兽更频繁地把事情搞砸：应用程序的状态管理和数据传播问题。那么，状态会出什么问题，尽管它只是用于读写的数据？","datePublished":"2022-06-16T06:01:01.000Z","dateModified":"2022-06-16T06:01:58.116Z","inLanguage":["zh-CN","en","zh-HK","zh-TW","default"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/"},"author":{"@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/"},"publisher":{"@type":"Organization","name":"Lagrange Point 的博客","logo":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/","wordCount":76,"image":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
