@@ -5,8 +5,8 @@
   <meta name="Volantis" content="5.0.0-alpha.111">
   <meta charset="utf-8">
   <!-- SEO相关 -->
-  <meta name="robots" content="noindex,follow">
-  <link rel="canonical" href="http://lagrange1813.top/archives/2022/06/"/>
+  
+  <link rel="canonical" href="http://lagrange1813.top/2022/07/06/combine踩坑记录一/"/>
   <!-- 渲染优化 -->
     <meta http-equiv='x-dns-prefetch-control' content='on' />
       <link rel='dns-prefetch' href='https://npm.elemecdn.com'>
@@ -32,18 +32,21 @@
 
   <!-- feed -->
   <!-- 页面元数据 -->
-  <title>归档：2022/6 - Lagrange Point 的博客</title>
-  <meta name="keywords" content="null">
-  <meta desc name="description" content="Lagrange Point 的博客 - Lagrange1813 - Lagrange Point 的博客">
+  <title>Combine踩坑记录一 - Lagrange Point 的博客</title>
+  <meta name="keywords" content="iOS,null">
+  <meta desc name="description" content="正如RxSwift to Apple’s Combine Cheat Sheet中所提及的， Combine中的CurrentValueSubject对应RxSwift中的BehaviorSubject。但在一开始不太了解的情况下，我使用了PassthroughSubject作为Combine重构RxSwift项... - Lagrange1813 - Lagrange Point 的博客">
   
-<meta property="og:type" content="website">
-<meta property="og:title" content="Lagrange Point 的博客">
-<meta property="og:url" content="http://lagrange1813.top/archives/2022/06/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Combine踩坑记录一">
+<meta property="og:url" content="http://lagrange1813.top/2022/07/06/Combine%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%80/index.html">
 <meta property="og:site_name" content="Lagrange Point 的博客">
-<meta property="og:description" content="Lagrange Point 的博客">
+<meta property="og:description" content="正如RxSwift to Apple’s Combine Cheat Sheet中所提及的， Combine中的CurrentValueSubject对应RxSwift中的BehaviorSubject。但在一开始不太了解的情况下，我使用了PassthroughSubject作为Combine重构RxSwift项目中BehaviorSubject和BehaviorRelay的对应替代。结果自然是产">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png">
+<meta property="article:published_time" content="2022-07-06T03:51:31.000Z">
+<meta property="article:modified_time" content="2022-07-06T11:27:08.902Z">
 <meta property="article:author" content="Lagrange1813">
+<meta property="article:tag" content="iOS">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png">
   <style>
@@ -2220,7 +2223,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <!-- Custom Files bodyBegin begin-->
     
     <!-- Custom Files bodyBegin end-->
-    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow blur " style='opacity: 0' >
+    <header itemscope itemtype="http://schema.org/WPHeader" id="l_header" class="l_header auto shadow blur show" style='opacity: 0' >
   <div class='container'>
   <div id='wrapper'>
     <div class='nav-sub'>
@@ -2489,7 +2492,7 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
   
     
       <!-- see: /layout/_partial/scripts/_ctrl/coverCtrl.ejs -->
-      <div id="half" class='cover-wrapper  search' style="display: ;">
+      <div id="none" class='cover-wrapper post search' style="display: none;">
         
   <div class='cover-bg lazyload placeholder' data-bg="https://fastly.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202204061202350.jpg"></div>
 
@@ -2553,22 +2556,8 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
         <div class="body-wrapper">
           
 <div id="l_main" class=''>
-	
-		
-  <section class="post-list">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <div class="post post-v3 white-box reveal shadow floatable blur"  itemscope itemtype="http://schema.org/Article" >
-  <link itemprop="mainEntityOfPage" href="http://lagrange1813.top/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/">
+  <article itemscope itemtype="http://schema.org/Article" class="article post white-box reveal md shadow floatable blur article-type-post" id="post" itemscope itemprop="blogPost">
+  <link itemprop="mainEntityOfPage" href="http://lagrange1813.top/2022/07/06/Combine%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%80/">
   <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
     <meta itemprop="name" content="Lagrange Point 的博客">
   </span>
@@ -2577,55 +2566,245 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     <meta itemprop="description" content="Lagrange Point 的博客">
   </span>
   
-  
+
+
   
     <span hidden>
       <meta itemprop="image" content="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png">
     </span>
   
-  
+  <div class="article-meta" id="top">
     
-    <h2 class="article-title"  itemprop="name headline">
-      <a href="/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/"  itemprop="url">
-        关于 iOS 中状态管理的完整指南
-      </a>
-    </h2>
-  
-  <div class='md article-desc' itemprop="articleBody">
     
-      软件开发存在许多挑战，但有一种野兽往往比其他野兽更频繁地把事情搞砸：应用程序的状态管理和数据传播问题。那么，状态会出什么问题，尽管它只是用于读写的数据？
+    
+      <h1 class="title" itemprop="name headline">
+        Combine踩坑记录一
+      </h1>
+      <div class='new-meta-box'>
+        
+          
+            
+<div class='new-meta-item author' itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a itemprop="url" class='author' href="/" rel="nofollow">
+    <img itemprop="image" src="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/apple-touch-icon.png" class="lazyload" data-srcset="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/apple-touch-icon.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+    <p itemprop="name">Lagrange</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+
+          
+        
+          
+            <div class="new-meta-item date" itemprop="dateCreated datePublished" datetime="2022-07-06T11:51:31+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：2022年7月6日</p>
+  </a>
+</div>
+
+          
+        
+          
+            
+  <div class="new-meta-item browse leancloud">
+    <a class='notlink'>
+      
+      <div id="lc-pv" data-title="Combine踩坑记录一" data-path="/2022/07/06/Combine%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%80/">
+        <i class="fa-solid fa-eye fa-fw" aria-hidden="true"></i>
+        <span id='number'><i class="fa-solid fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+        次浏览
+      </div>
+    </a>
+  </div>
+
+
+          
+        
+        <!-- Custom Files topMeta begin-->
+        
+        <!-- Custom Files topMeta end-->
+      </div>
     
   </div>
+
+
+  <div id="layoutHelper-page-plugins"></div>
+  <div id="post-body" itemprop="articleBody">
+    <h1 id="PassthroughSubject和CurrentValueSubject"><a href="#PassthroughSubject和CurrentValueSubject" class="headerlink" title="PassthroughSubject和CurrentValueSubject"></a>PassthroughSubject和CurrentValueSubject</h1><p>正如<a target="_blank" rel="noopener" href="https://github.com/CombineCommunity/rxswift-to-combine-cheatsheet">RxSwift to Apple’s Combine Cheat Sheet</a>中所提及的， Combine中的CurrentValueSubject对应RxSwift中的BehaviorSubject。但在一开始不太了解的情况下，我使用了PassthroughSubject作为Combine重构RxSwift项目中BehaviorSubject和BehaviorRelay的对应替代。</p>
+<p>结果自然是产生了令人困惑的Bug😭。下面的内容围绕这两者的差异展开。</p>
+<h3 id="PassthroughSubject"><a href="#PassthroughSubject" class="headerlink" title="PassthroughSubject"></a>PassthroughSubject</h3><p>什么是PassthroughSubject？Apple的文档中给出的定义是“A subject that broadcasts elements to downstream subscribers”，即向下游订阅者广播元素的主题。</p>
+<p>那么它的特点是什么？“与CurrentValueSubject不同，PassthroughSubject没有最近发布的元素的初始值或缓冲区。如果没有订阅者，或者其当前需求为零，则PassthroughSubject将丢弃值。”</p>
+<p>简而言之，它仅仅只是当事件产生时推送给所有订阅者。</p>
+<h3 id="CurrentValueSubject"><a href="#CurrentValueSubject" class="headerlink" title="CurrentValueSubject"></a>CurrentValueSubject</h3><p>什么是CurrentValueSubject？“每当值发生变化时，包装单个值并发布新元素的主题。”</p>
+<p>它的特性在于“与PassthroughSubject不同，CurrentValueSubject维护最近发布的元素的缓冲区。”并且即使更新的值等于当前值，也会发布新元素。</p>
+<p>与PassthroughSubject不同，缓冲区的加入使CurrentValueSubject始终保存一个值，新订阅者将直接接收主题中包含的当前值。</p>
+<h3 id="理解两者之间的区别"><a href="#理解两者之间的区别" class="headerlink" title="理解两者之间的区别"></a>理解两者之间的区别</h3><p>RxSwift中分别与之对应的PublishSubject（对应PassthroughSubject）和BehaviorSubject（对应CurrentValueSubject）的示意图相当直观：</p>
+<div align="center"><img src="https://fastly.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202207061919897.png" class="lazyload" data-srcset="https://fastly.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202207061919897.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="600px"/></div>
+
+<p>新订阅者不会接收到订阅之前产生的最新事件</p>
+<div align="center"><img src="https://fastly.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202207061921143.png" class="lazyload" data-srcset="https://fastly.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202207061921143.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" width="600px"/></div>
+
+<p>新订阅者能接收到订阅之前的最新事件</p>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://www.avanderlee.com/combine/passthroughsubject-currentvaluesubject-explained/">PassthroughSubject vs. CurrentValueSubject explained (avanderlee.com)</a></li>
+</ul>
+
+
+  </div>
   
-    <div class='meta-v3' line_style='solid'>
-      <div>
-        
-        <time itemprop="dateCreated datePublished" datetime="2022-06-16T14:01:01+08:00">2022-06-16</time>
-        
-      </div>
+  
+    
+    <div class='footer'>
       
-        <div>
-          <a class='readmore' href='/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/' itemprop="url">
-            阅读全文
-          </a>
+      
+      
+        <div class='copyright'>
+          <blockquote>
+            
+              
+                <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+              
+            
+              
+                <p>本文永久链接是：<a href=http://lagrange1813.top/2022/07/06/Combine%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%80/>http://lagrange1813.top/2022/07/06/Combine%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%80/</a></p>
+              
+            
+          </blockquote>
         </div>
+      
       
     </div>
   
+  
+    
 
+
+  <div class='article-meta' id="bottom">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateModified" datetime="2022-07-06T19:27:08+08:00">
+  <a class='notlink'>
+    <i class="fa-solid fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：2022年7月6日</p>
+  </a>
 </div>
 
-          </div>
         
       
-    
-  </section>
+        
+          
   
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/iOS/" rel="nofollow"><i class="fa-solid fa-hashtag fa-fw" aria-hidden="true"></i><p>iOS</p></a></div>
+  <span hidden itemprop="keywords">iOS</span>
+
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
     
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://lagrange1813.top/2022/07/06/Combine%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%80/&title=Combine踩坑记录一 - Lagrange Point 的博客&summary=正如RxSwift to Apple’s Combine Cheat Sheet中所提及的， Combine中的CurrentValueSubject对应RxSwift中的BehaviorSubject。但在一开始不太了解的情况下，我使用了PassthroughSubject作为Combine重构RxSwift项目中BehaviorSubject和BehaviorRelay的对应替代。结果自然是产生了令人困惑的Bug😭。下面的内容围绕这两者的差异展开。"
+          
+          >
+          
+            <img src="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/logo/128/qq.png" class="lazyload" data-srcset="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/logo/128/qq.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://lagrange1813.top/2022/07/06/Combine%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%80/&title=Combine踩坑记录一 - Lagrange Point 的博客&summary=正如RxSwift to Apple’s Combine Cheat Sheet中所提及的， Combine中的CurrentValueSubject对应RxSwift中的BehaviorSubject。但在一开始不太了解的情况下，我使用了PassthroughSubject作为Combine重构RxSwift项目中BehaviorSubject和BehaviorRelay的对应替代。结果自然是产生了令人困惑的Bug😭。下面的内容围绕这两者的差异展开。"
+          
+          >
+          
+            <img src="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/logo/128/qzone.png" class="lazyload" data-srcset="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/logo/128/qzone.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer noopener"
+          
+          target="_blank" href="http://service.weibo.com/share/share.php?url=http://lagrange1813.top/2022/07/06/Combine%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%80/&title=Combine踩坑记录一 - Lagrange Point 的博客&summary=正如RxSwift to Apple’s Combine Cheat Sheet中所提及的， Combine中的CurrentValueSubject对应RxSwift中的BehaviorSubject。但在一开始不太了解的情况下，我使用了PassthroughSubject作为Combine重构RxSwift项目中BehaviorSubject和BehaviorRelay的对应替代。结果自然是产生了令人困惑的Bug😭。下面的内容围绕这两者的差异展开。"
+          
+          >
+          
+            <img src="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/logo/128/weibo.png" class="lazyload" data-srcset="https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/logo/128/weibo.png" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
+          
+        </a>
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+    <!-- Custom Files bottomMeta begin -->
+    
+    <!-- Custom Files bottomMeta end -->
+  </div>
+
+
+  
+  
+
+  
+    <div class="prev-next">
+      
+      
+        <a class='next' href='/2022/06/16/%E5%85%B3%E4%BA%8E%20iOS%20%E4%B8%AD%E7%8A%B6%E6%80%81%E7%AE%A1%E7%90%86%E7%9A%84%E5%AE%8C%E6%95%B4%E6%8C%87%E5%8D%97/'>
+          <p class='title'>关于 iOS 中状态管理的完整指南<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></p>
+          <p class='content'>原文 The Complete Guide to the State Management in iOS - Alexey Naumov (nalexn.github.io)
+本指南深入探讨了基...</p>
+        </a>
+      
+    </div>
+  
+  <!-- Custom Files postEnd begin-->
+  
+  <!-- Custom Files postEnd end-->
+</article>
+
+
   
 
 
-	
+  <article class="post white-box shadow floatable blur" id="comments">
+    <span hidden>
+      <meta itemprop="discussionUrl" content="/2022/07/06/Combine%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%80/index.html#comments">
+    </span>
+    <p ct><i class='fa-solid fa-comments'></i> 评论</p>
+    
+
+    <div id="layoutHelper-comments"></div>
+
+  </article>
+
+
+
+
+
+
 </div>
 <aside id='l_side' itemscope itemtype="http://schema.org/WPSideBar">
   
@@ -2633,182 +2812,34 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     
     
 
-<section class="widget blogger shadow floatable blur desktop mobile pjax">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box rectangle' href='/about/'>
-          <img no-lazy src='https://fastly.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202205112020337.jpg'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">Lagrange Point 的博客</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fa-solid fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:me@xxx.com"
-              class="social fa-solid fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/volantis-x/"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="/"
-              class="social fa-solid fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-      </div>
-    
-  </div>
-</section>
 
-  
 
-  
-    
-    
-  
-
-  <section class="widget category shadow floatable blur desktop pjax">
+  <section class="widget toc-wrapper shadow floatable blur desktop mobile pjax" id="toc-div" >
     
   <header>
     
-      <a href='/blog/categories/'><i class="fa-solid fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i class="fa-solid fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 
 
     <div class='content'>
-      <ul class="entry navigation">
-        
-          <li><a class="flat-box"
-            title="/categories/CSAPP/" href="/categories/CSAPP/"
-            active-action="action-categoriesCSAPP"
-            ><div class='name'>CSAPP</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box"
-            title="/categories/UIKit/" href="/categories/UIKit/"
-            active-action="action-categoriesUIKit"
-            ><div class='name'>UIKit</div><div class='badge'>(1)</div></a></li>
-        
-          <li><a class="flat-box child"
-            title="/categories/UIKit/%E6%9D%82%E8%B0%88/" href="/categories/UIKit/%E6%9D%82%E8%B0%88/"
-            active-action="action-categoriesUIKitE69D82E8B088"
-            ><div class='name'>杂谈</div><div class='badge'>(1)</div></a></li>
-        
-      </ul>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#PassthroughSubject"><span class="toc-text">PassthroughSubject</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CurrentValueSubject"><span class="toc-text">CurrentValueSubject</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%90%86%E8%A7%A3%E4%B8%A4%E8%80%85%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">理解两者之间的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-text">参考文档</span></a></li></ol>
     </div>
   </section>
-
-
-  
-
-  
-    
-    
-
-<section class="widget shadow floatable blur desktop pjax">
-  
-  <header>
-    
-      <i class="fa-solid fa-award fa-fw" aria-hidden="true"></i><span class='name'>站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>6 篇</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>已运行时间：</div>
-          <div id="webinfo-runtime-count"></div>
-        </div>
-      
-
-
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站访客数：</div>
-          
-          <div><span id="lc-uv"><span id='number'><i class="fa-solid fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 人</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站总访问量：</div>
-          
-          <div><span id="lc-sv"><span id='number'><i class="fa-solid fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span></span> 次</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          <div id="last-update-show">2022-07-06 日</div>
-        </div>
-      
-    </div>
-  </div>
-</section>
-
-  
-
-  
-    
-    
-
-
 
   
 
 
 <!-- 没有 pjax 占位会报错 万恶的 pjax -->
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
+
+  <div class="pjax">
+    <!-- pjax占位 -->
+  </div>
 
   <div class="pjax">
     <!-- pjax占位 -->
@@ -2837,13 +2868,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
 </aside>
 
 
+
           <!--此文件用来存放一些不方便取值的变量-->
 <!--思路大概是将值藏到重加载的区域内-->
 
 <pjax>
 <script>
   window.pdata={}
-  pdata.ispage=false;
+  pdata.ispage=true;
   pdata.commentPath="";
   pdata.commentPlaceholder="";
   pdata.commentConfig={};
@@ -2852,14 +2884,14 @@ if (/*@cc_on!@*/false || (!!window.MSInputMethodContext && !!document.documentMo
     // header
     var l_header=document.getElementById("l_header");
     
-    l_header.classList.remove("show");
+    l_header.classList.add("show");
     
     
       // cover
       var cover_wrapper=document.querySelector('#l_cover .cover-wrapper');
       var scroll_down=document.getElementById('scroll-down');
-      cover_wrapper.id="half";
-      cover_wrapper.style.display="";
+      cover_wrapper.id="none";
+      cover_wrapper.style.display="none";
       scroll_down.style.display="none";
     
   
@@ -4325,7 +4357,7 @@ window.matchMedia('(prefers-color-scheme: light)').addListener(darkModelListener
 
 
 
-  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","logo":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/","sameAs":["https://github.com/volantis-x"],"description":"Lagrange Point 的博客"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://lagrange1813.top/","name":"Lagrange Point 的博客"}},{"@type":"ListItem","position":2,"item":{"@id":"http://lagrange1813.top/archives/","name":"Archive"}},{"@type":"ListItem","position":3,"item":{"@id":"http://lagrange1813.top/archives/2022/","name":"2022年"}},{"@type":"ListItem","position":4,"item":{"@id":"http://lagrange1813.top/archives/2022/6/","name":"6月"}}]},{"@context":"http://schema.org","@type":"WebSite","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","keywords":null,"description":"Lagrange Point 的博客","author":{"@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/","description":"Lagrange Point 的博客"},"publisher":{"@type":"Organization","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","logo":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"potentialAction":{"@type":"SearchAction","name":"Site Search","target":{"@type":"EntryPoint","urlTemplate":"http://lagrange1813.top?s={search_term_string}"},"query-input":"required name=search_term_string"}}]</script>
+  <script type="application/ld+json">[{"@context":"http://schema.org","@type":"Organization","name":"Lagrange Point 的博客","url":"http://lagrange1813.top/","logo":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},{"@context":"http://schema.org","@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/","sameAs":["https://github.com/volantis-x"],"description":"Lagrange Point 的博客"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"http://lagrange1813.top/","name":"Lagrange Point 的博客"}},{"@type":"ListItem","position":3,"item":{"@id":"http://lagrange1813.top/2022/07/06/Combine踩坑记录一/","name":"Combine踩坑记录一"}}]},{"@context":"http://schema.org","@type":"BlogPosting","headline":"Combine踩坑记录一","description":"正如RxSwift to Apple’s Combine Cheat Sheet中所提及的， Combine中的CurrentValueSubject对应RxSwift中的BehaviorSubject。但在一开始不太了解的情况下，我使用了PassthroughSubject作为Combine重构RxSwift项目中BehaviorSubject和BehaviorRelay的对应替代。结果自然是产生了令人困惑的Bug😭。下面的内容围绕这两者的差异展开。","datePublished":"2022-07-06T03:51:31.000Z","dateModified":"2022-07-06T11:27:08.902Z","inLanguage":["zh-CN","en","zh-HK","zh-TW","default"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://lagrange1813.top/2022/07/06/Combine%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%80/"},"author":{"@type":"Person","name":"Lagrange1813","image":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png"},"url":"http://lagrange1813.top/"},"publisher":{"@type":"Organization","name":"Lagrange Point 的博客","logo":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}},"url":"http://lagrange1813.top/2022/07/06/Combine%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95%E4%B8%80/","wordCount":229,"keywords":"iOS","image":{"@type":"ImageObject","url":"https://npm.elemecdn.com/volantis-static@0.0.1649552113628/media/org.volantis/blog/favicon/android-chrome-192x192.png","width":192,"height":192}}]</script>
 
 
 
