@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='对一个操作系统来说，一个程序实例一般是一个进程。进程包括运行中的程序和程序所使用到的内存和系统资源。线程是程序中的一个执行流，每个线程都有自己的专有寄存器，但代码区是共享的，即不同的线程可以执行同样的函数。'>
+<title>iOS 并发引入</title>
+
+<link rel='canonical' href='https://example.com/p/ios-concurrency/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='iOS 并发引入'>
+<meta property='og:description' content='对一个操作系统来说，一个程序实例一般是一个进程。进程包括运行中的程序和程序所使用到的内存和系统资源。线程是程序中的一个执行流，每个线程都有自己的专有寄存器，但代码区是共享的，即不同的线程可以执行同样的函数。'>
+<meta property='og:url' content='https://example.com/p/ios-concurrency/'>
+<meta property='og:site_name' content='Lagrange1813&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2022-10-15T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2022-10-15T00:00:00&#43;00:00'/><meta property='og:image' content='https://example.com/p/ios-concurrency/tony-litvyak-cB9nWCxfKNU-unsplash.jpg' />
+<meta name="twitter:title" content="iOS 并发引入">
+<meta name="twitter:description" content="对一个操作系统来说，一个程序实例一般是一个进程。进程包括运行中的程序和程序所使用到的内存和系统资源。线程是程序中的一个执行流，每个线程都有自己的专有寄存器，但代码区是共享的，即不同的线程可以执行同样的函数。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://example.com/p/ios-concurrency/tony-litvyak-cB9nWCxfKNU-unsplash.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🧐</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Lagrange1813&#39;s Blog</a></h1>
+            <h2 class="site-description">露重飞难进，风多响易沉。</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Lagrange1813'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>存档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一堆概念">一堆概念</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#单核与多核">单核与多核</a></li>
+            <li><a href="#进程与线程">进程与线程</a></li>
+            <li><a href="#单线程与多线程">单线程与多线程</a></li>
+            <li><a href="#并行与并发">并行与并发</a></li>
+            <li><a href="#单核多线程与多核多线程">单核多线程与多核多线程</a></li>
+            <li><a href="#计算密集型任务-与-io密集型任务">计算密集型任务 与 IO密集型任务</a></li>
+            <li><a href="#同步和异步">同步和异步</a></li>
+            <li><a href="#串行和并行ios语境中">串行和并行（iOS语境中）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#ios-多线程">iOS 多线程</a>
+      <ol>
+        <li><a href="#gcd">GCD</a>
+          <ol>
+            <li><a href="#goto">GOTO</a></li>
+            <li><a href="#swift-并发-协程">Swift 并发 (协程)</a></li>
+            <li><a href="#gcd-与-swift-并发比较">GCD 与 Swift 并发比较</a></li>
+          </ol>
+        </li>
+        <li><a href="#参考文献">参考文献</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/ios-concurrency/">
+                <img src="/p/ios-concurrency/tony-litvyak-cB9nWCxfKNU-unsplash_hu3d03a01dcc18bc5be0e67db3d8d209a6_640439_800x0_resize_q75_box.jpg"
+                        srcset="/p/ios-concurrency/tony-litvyak-cB9nWCxfKNU-unsplash_hu3d03a01dcc18bc5be0e67db3d8d209a6_640439_800x0_resize_q75_box.jpg 800w, /p/ios-concurrency/tony-litvyak-cB9nWCxfKNU-unsplash_hu3d03a01dcc18bc5be0e67db3d8d209a6_640439_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="1200" 
+                        loading="lazy"
+                        alt="Featured image of post iOS 并发引入" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ios/" style="background-color: #2a9d8f; color: #fff;">
+                iOS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/ios-concurrency/">iOS 并发引入</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            对一个操作系统来说，一个程序实例一般是一个进程。进程包括运行中的程序和程序所使用到的内存和系统资源。线程是程序中的一个执行流，每个线程都有自己的专有寄存器，但代码区是共享的，即不同的线程可以执行同样的函数。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 15, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="一堆概念">一堆概念</h2>
+<p>广义语境下</p>
+<h4 id="单核与多核">单核与多核</h4>
+<p><strong>硬件概念</strong> 最早的双核处理器 Intel 奔腾。</p>
+<p>超线程技术：一颗核心以模拟的方式扮作两颗处理器。</p>
+<h4 id="进程与线程">进程与线程</h4>
+<p>对一个操作系统来说，一个程序实例一般是一个进程。进程包括运行中的程序和程序所使用到的内存和系统资源。</p>
+<p>线程是程序中的一个<strong>执行流</strong>，每个线程都有自己的专有寄存器，但代码区是共享的，即不同的线程可以执行同样的函数。</p>
+<h4 id="单线程与多线程">单线程与多线程</h4>
+<p>单线程是指程序中包含一个执行流。</p>
+<p>多线程是指程序中包含多个执行流，即在一个程序中可以同时运行多个不同的线程来执行不同的任务，也就是说允许单个程序创建多个并行执行的线程来完成各自的任务。</p>
+<h4 id="并行与并发">并行与并发</h4>
+<div align="center"><img src="https://fastly.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202210142241226.png" width="600px"/></div>
+<p>Erlang 之父 Joe Armstrong</p>
+<h4 id="单核多线程与多核多线程">单核多线程与多核多线程</h4>
+<p>单核多线程：并发</p>
+<p>多核多线程：线程数小于空余核心数时为并行，大于时为部分并行部分并发</p>
+<h4 id="计算密集型任务-与-io密集型任务">计算密集型任务 与 IO密集型任务</h4>
+<p>计算密集型任务：特点是要进行大量的计算，消耗CPU资源，比如计算圆周率、对视频进行高清解码、图像渲染等等，全靠CPU的运算能力。</p>
+<p>IO密集型任务：涉及到网络、磁盘IO的任务。CPU消耗很少，任务的大部分时间都在等待IO操作完成。</p>
+<h4 id="同步和异步">同步和异步</h4>
+<p>形容具体的一个函数，一段代码。</p>
+<p><strong>同步</strong>：会逐行执行代码，会对后续代码造成<strong>阻塞</strong>，直至代码接收到预期的结果之后，才会继续向下执行任务。</p>
+<p><strong>异步</strong>：调用之后先不管结果，继续向下执行任务。</p>
+<p><strong>单线程异步</strong>：JavaScript 利用计时器回调，适合 IO 密集型任务。</p>
+<p><strong>多线程异步</strong>：多核处理，background 线程处理后通知主线程。</p>
+<hr>
+<h4 id="串行和并行ios语境中">串行和并行（iOS语境中）</h4>
+<p>形容一组操作、函数、一组内多段代码的关系。</p>
+<p><strong>串行</strong>：“做完一件事，然后再进行下一件事”。</p>
+<p><strong>并行</strong>：两个异步操作，在不同的线程中同时执行。对于这种拥有多套资源同时执行的方式，我们就将它称为<strong>并行 (parallel)</strong>。</p>
+<p>异步但串行 （通过回调嵌套）</p>
+<div align="left"><img src="https://fastly.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202210151416057.png" width="600px"/></div>
+<p>异步且并行</p>
+<div align="left"><img src="https://fastly.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202210151416904.png" width="600px"/></div>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">串行</th>
+<th style="text-align:center">并行（多核多线程）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">同步</td>
+<td style="text-align:center">可能会造成线程阻塞</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td style="text-align:center">异步</td>
+<td style="text-align:center">回调函数</td>
+<td style="text-align:center">并行</td>
+</tr>
+</tbody>
+</table></div>
+<p>嵌套起来&hellip;异步代码最终都可以被拆解为同步代码和另一段更短的异步代码。</p>
+<p>iPhone 均是多核处理器，因此 Swift 中所指的异步大部分情况指的是多线程异步。</p>
+<hr>
+<h2 id="ios-多线程">iOS 多线程</h2>
+<p><strong>主线程</strong>：UI线程</p>
+<p><strong>背景线程</strong>：外主线程的其他线程</p>
+<div align="center"><img src="https://fastly.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202210151101185.png" width="600px"/></div>
+<p>在主线程（UI线程）进行耗时的操作</p>
+<div align="center"><img src="https://fastly.jsdelivr.net/gh/Lagrange1813/Blog-Img/2022/202210151102476.png" width="600px"/></div>
+<p>利用背景线程进行耗时操作并提供异步回调，避免 <strong>卡顿</strong> 。</p>
+<h3 id="gcd">GCD</h3>
+<blockquote>
+<p>&ldquo;DispatchQueue 是一个管理应用程序的主线程或后台线程任务的串行或并发执行的对象。&rdquo;</p>
+<p align="right">—— Apple Developer</p>
+</blockquote>
+<p>指定优先级</p>
+<blockquote>
+<ul>
+<li><strong>background</strong> — 当一个任务对时间不敏感，或者当用户可以在这个过程中做一些其他的互动时，我们可以使用这个方法。比如预先获取一些图片做预加载，或者在后台处理一些数据。这个任务的执行需要一定的时间，几秒或者几分钟，甚至几个小时。</li>
+<li><strong>utility</strong> — 长期运行的任务。一些用户可以看到处理过程。例如，下载一些带有指标的地图。这个任务可能需要几秒钟甚至几十分钟的时间。</li>
+<li><strong>userInitiated</strong> — 用户从用户界面启动一些任务并等待结果以继续与应用程序交互。这个任务需要几秒钟或一瞬间。</li>
+<li><strong>userInteractive</strong> — 用户需要立即完成某些任务，以便能够继续与应用程序进行下一次交互。是一个即时任务。</li>
+</ul>
+</blockquote>
+<ul>
+<li>调度组（DispatchGroup）控制并发</li>
+<li>调度信号量（DispatchSemaphore）控制阻塞</li>
+<li>调度障碍 Dispatch Barrier 保证线程安全</li>
+</ul>
+<p><a class="link" href="https://juejin.cn/post/6844903566398717960"  target="_blank" rel="noopener"
+    >https://juejin.cn/post/6844903566398717960</a></p>
+<h4 id="goto">GOTO</h4>
+<p>Go To Statement Considered Harmful</p>
+<p>推广结构化并发，解决并发任务生命周期问题</p>
+<h4 id="swift-并发-协程">Swift 并发 (协程)</h4>
+<blockquote>
+<p>Swift 提供内建的支持，让开发者能以结构化的方式书写异步和并行的代码，… 并发这个术语，指的是异步和并行这一常见组合。</p>
+</blockquote>
+<ul>
+<li>async/await 实现异步代码的基础</li>
+<li>task 在串行域（主线程）中开启并行域</li>
+<li>actor 保障并发安全</li>
+<li>sendable 线程之间信息传输</li>
+</ul>
+<p>最终</p>
+<ul>
+<li>异步函数可以帮助我们写出简单的异步代码，Swift 并发中很多 API 也都是通过异步函数提供的；</li>
+<li>通过组织结构化并发，可以保证任务的执行顺序、正确的生命周期和良好的取消操作；</li>
+<li>利用 actor 和 Sendable 等，编译器能保证数据的安全。</li>
+</ul>
+<h4 id="gcd-与-swift-并发比较">GCD 与 Swift 并发比较</h4>
+<p>线程切换和线程爆炸</p>
+<p>详细介绍见王巍老师《Swift 异步和并发》</p>
+<hr>
+<h3 id="参考文献">参考文献</h3>
+<ul>
+<li><a class="link" href="https://juejin.cn/post/7110846624217661454"  target="_blank" rel="noopener"
+    >https://juejin.cn/post/7110846624217661454</a></li>
+<li><a class="link" href="https://zhuanlan.zhihu.com/p/108759542"  target="_blank" rel="noopener"
+    >https://zhuanlan.zhihu.com/p/108759542</a></li>
+<li><a class="link" href="https://onevcat.com/2021/07/swift-concurrency/"  target="_blank" rel="noopener"
+    >https://onevcat.com/2021/07/swift-concurrency/</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/coordinator-introduction/">
+        
+        
+            <div class="article-image">
+                <img src="/p/coordinator-introduction/_hu3d03a01dcc18bc5be0e67db3d8d209a6_217027_780e4aadff8bafe71ea90d94540987cf.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Coordinator 模式"
+                        data-key="coordinator-introduction" 
+                        data-hash="md5-YT&#43;pYSoX/bxweT0NqabBpw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Coordinator 模式</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/adaptive-navigation/">
+        
+        
+            <div class="article-image">
+                <img src="/p/adaptive-navigation/_hu3d03a01dcc18bc5be0e67db3d8d209a6_201144_e728c6e3388700739ac2f91dc4cc33d2.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Column Style 分栏视图控制器配合标签栏控制器并实现自适应导航"
+                        data-key="adaptive-navigation" 
+                        data-hash="md5-cXHdSvi0QiXqmOUXJe0d9A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Column Style 分栏视图控制器配合标签栏控制器并实现自适应导航</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/state-management/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">关于 iOS 中状态管理的完整指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 Lagrange
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.20.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

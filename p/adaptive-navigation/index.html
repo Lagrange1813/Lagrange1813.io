@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='本文基于经典风格的方案进行调整优化，以实现在 Column Style SplitViewController 中实现视图控制器堆栈自适应调整的自适应导航效果。'>
+<title>Column Style 分栏视图控制器配合标签栏控制器并实现自适应导航</title>
+
+<link rel='canonical' href='https://example.com/p/adaptive-navigation/'>
+
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Column Style 分栏视图控制器配合标签栏控制器并实现自适应导航'>
+<meta property='og:description' content='本文基于经典风格的方案进行调整优化，以实现在 Column Style SplitViewController 中实现视图控制器堆栈自适应调整的自适应导航效果。'>
+<meta property='og:url' content='https://example.com/p/adaptive-navigation/'>
+<meta property='og:site_name' content='Lagrange1813&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2023-06-01T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-06-01T00:00:00&#43;00:00'/><meta property='og:image' content='https://example.com/p/adaptive-navigation/wolfgang-hasselmann-Z30EBohFtqU-unsplash.jpg' />
+<meta name="twitter:title" content="Column Style 分栏视图控制器配合标签栏控制器并实现自适应导航">
+<meta name="twitter:description" content="本文基于经典风格的方案进行调整优化，以实现在 Column Style SplitViewController 中实现视图控制器堆栈自适应调整的自适应导航效果。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://example.com/p/adaptive-navigation/wolfgang-hasselmann-Z30EBohFtqU-unsplash.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🧐</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Lagrange1813&#39;s Blog</a></h1>
+            <h2 class="site-description">露重飞难进，风多响易沉。</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/Lagrange1813'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>存档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>暗色模式</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#相关概念">相关概念</a></li>
+    <li><a href="#具体实现">具体实现</a>
+      <ol>
+        <li><a href="#重写-showdetailviewcontroller">重写 showDetailViewController</a></li>
+        <li><a href="#在布局变化时调整视图控制器堆栈">在布局变化时调整视图控制器堆栈</a>
+          <ol>
+            <li><a href="#collapse">Collapse</a></li>
+            <li><a href="#expand">Expand</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#重写-uinavigationcontroller">重写 UINavigationController</a>
+      <ol>
+        <li><a href="#显示模式">显示模式</a></li>
+        <li><a href="#调整内置的-uitabbar">调整内置的 UITabBar</a></li>
+        <li><a href="#与-uitabbar-进一步配合">与 UITabBar 进一步配合</a></li>
+        <li><a href="#与-navigator-进行配合">与 Navigator 进行配合</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/adaptive-navigation/">
+                <img src="/p/adaptive-navigation/wolfgang-hasselmann-Z30EBohFtqU-unsplash_hu3d03a01dcc18bc5be0e67db3d8d209a6_201144_800x0_resize_q75_box.jpg"
+                        srcset="/p/adaptive-navigation/wolfgang-hasselmann-Z30EBohFtqU-unsplash_hu3d03a01dcc18bc5be0e67db3d8d209a6_201144_800x0_resize_q75_box.jpg 800w, /p/adaptive-navigation/wolfgang-hasselmann-Z30EBohFtqU-unsplash_hu3d03a01dcc18bc5be0e67db3d8d209a6_201144_1600x0_resize_q75_box.jpg 1600w"
+                        width="800" 
+                        height="533" 
+                        loading="lazy"
+                        alt="Featured image of post Column Style 分栏视图控制器配合标签栏控制器并实现自适应导航" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/uikit/" >
+                UIKit
+            </a>
+        
+            <a href="/categories/ios/" style="background-color: #2a9d8f; color: #fff;">
+                iOS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/adaptive-navigation/">Column Style 分栏视图控制器配合标签栏控制器并实现自适应导航</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            本文基于经典风格的方案进行调整优化，以实现在 Column Style SplitViewController 中实现视图控制器堆栈自适应调整的自适应导航效果。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 01, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 6 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>在 Classic Style 的 UISplitViewController 中，已有较为完善的方案实现在 UISplitViewController Master 页面嵌套 UITabBarController，并达成类似 ShortCut 应用在 Expand 和 Collapse 时自动调整视图堆栈的效果，但在 Column Style 的 UISplitViewController 中，这些方案由于 Apple 禁止将 Primary Column 设置为 UITabBarController 而无法实现。</p>
+<p>本文基于经典风格的方案进行调整优化，以实现在 Column Style SplitViewController 中实现视图控制器堆栈自适应调整的自适应导航效果。</p>
+<div align="center"><img src="https://raw.githubusercontent.com/Gravitation1813/image-hosting/main/2023/202304292340262.gif" width="700px"/></div>
+<p>基于探索，UISplitViewController 无法在 Primary Column 使用 UITabBarController 的主要原因是 UINavigationController 的嵌套会造成崩溃，根据 Apple 的文档来看，UISplitViewController 会默认在非 UINavigationController 的 Primary Column 视图外嵌套一层 UINavigationController，而这造成了与 UITabBarController 的冲突。</p>
+<p>在早期探索中，可以使用自定义 TabBarController 的方案来绕过限制，即自定义容器视图控制器，添加 UITabBar并实现代理。但是，如果在外层嵌套导航控制器，会导致导航栏无法对子视图控制器的行为产生响应（如大标题风格导航栏的折叠等），而在内层嵌套，即将子视图控制器包裹在导航控制器中，又会导致两层导航控制器的冲突（UISplitViewController 默认添加的和包裹子视图控制器的）。</p>
+<p>本文采取了一种较为巧妙的方案，即子类化 UINavigationController，添加导航栏，并重写部分方法以达成 UITabBarController 的效果。</p>
+<h2 id="相关概念">相关概念</h2>
+<div align="center"><img src="https://raw.githubusercontent.com/Gravitation1813/image-hosting/main/2023/202306011634949.png" width="700px"/></div>
+<ul>
+<li>子类化 UISplitViewController 为 AdaptiveNavigator 以便重写相应方法
+<ul>
+<li>Primary Column 为 EmbeddedTabBarController</li>
+<li>Secondary Column 为 自动添加的 UINavigationController</li>
+</ul>
+</li>
+<li>子类化 UINavigationController 为 EmbeddedTabBarController，并添加 UITabBar 视图和 tabViewControllers 属性</li>
+<li>子类化 UIViewController，并设置为默认的 Secondary Column 视图，用来占位</li>
+</ul>
+<h2 id="具体实现">具体实现</h2>
+<h3 id="重写-showdetailviewcontroller">重写 showDetailViewController</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kr">override</span> <span class="kd">func</span> <span class="nf">showDetailViewController</span><span class="p">(</span><span class="kc">_</span> <span class="n">vc</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="nb">Any</span><span class="p">?)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">isCollapsed</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">guard</span>
+</span></span><span class="line"><span class="cl">      <span class="n">viewControllers</span><span class="p">.</span><span class="bp">count</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">let</span> <span class="nv">navController</span> <span class="p">=</span> <span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="p">?</span> <span class="n">EmbeddedTabBarController</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">navController</span><span class="p">.</span><span class="n">rawPushViewController</span><span class="p">(</span><span class="n">vc</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">guard</span>
+</span></span><span class="line"><span class="cl">      <span class="n">viewControllers</span><span class="p">.</span><span class="bp">count</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">let</span> <span class="nv">primary</span> <span class="p">=</span> <span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="p">?</span> <span class="n">EmbeddedTabBarController</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">let</span> <span class="nv">navController</span> <span class="p">=</span> <span class="n">viewControllers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">as</span><span class="p">?</span> <span class="n">UINavigationController</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">isPlaceholderTop</span> <span class="p">=</span> <span class="n">navController</span><span class="p">.</span><span class="n">topViewController</span> <span class="k">is</span> <span class="n">Placeholder</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">isFromPrimary</span> <span class="p">=</span> <span class="p">(</span><span class="n">sender</span> <span class="k">as</span><span class="p">?</span> <span class="n">UIViewController</span><span class="p">)</span> <span class="p">==</span> <span class="p">(</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="p">?</span> <span class="n">EmbeddedTabBarController</span><span class="p">)?.</span><span class="n">selectedViewController</span>
+</span></span><span class="line"><span class="cl">      <span class="o">||</span> <span class="p">(</span><span class="n">sender</span> <span class="k">as</span><span class="p">?</span> <span class="n">EmbeddedTabBarController</span> <span class="p">===</span> <span class="n">primary</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">isFromPrimary</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">navController</span><span class="p">.</span><span class="n">popToRootViewController</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">navController</span><span class="p">.</span><span class="n">pushViewController</span><span class="p">(</span><span class="n">vc</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="n">isPlaceholderTop</span> <span class="o">||</span> <span class="o">!</span><span class="n">isFromPrimary</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们可以通过 isCollapsed 属性来判断当前 UISplitViewController 的状态。</p>
+<p>当状态为 Collapsed 时，我们调用 EmbeddedTabBarController 的 rawPushViewController 方法来推送视图（后文会介绍该方法）；</p>
+<p>当状态为 Expanded 时，我们判断当前 Secondary Column 是否仅有 Placeholder，以及发送 showDetailViewController 的实例是否来自于 Primary Column，以此来决定是否在推送时显示动画，最终调用 Secondary Column 的 UINavigationController 来推送视图。</p>
+<blockquote>
+<p>默认情况下，Secondary Column 返回根视图时会取消 Primary Column 的选中项，我由于应用设计的原因在这里没有处理，如有需求可通过通知中心等传递消息以取消选中。</p>
+<p>可以参考 <a class="link" href="https://nyrra33.com/2020/06/27/using-uisplitviewcontroller-with-uitabbarcontroller/"  target="_blank" rel="noopener"
+    >https://nyrra33.com/2020/06/27/using-uisplitviewcontroller-with-uitabbarcontroller/</a> 的处理方法。</p>
+</blockquote>
+<h3 id="在布局变化时调整视图控制器堆栈">在布局变化时调整视图控制器堆栈</h3>
+<h4 id="collapse">Collapse</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">func</span> <span class="nf">splitViewController</span><span class="p">(</span><span class="kc">_</span> <span class="n">svc</span><span class="p">:</span> <span class="n">UISplitViewController</span><span class="p">,</span> <span class="n">topColumnForCollapsingToProposedTopColumn</span> <span class="n">proposedTopColumn</span><span class="p">:</span> <span class="n">UISplitViewController</span><span class="p">.</span><span class="n">Column</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UISplitViewController</span><span class="p">.</span><span class="n">Column</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">guard</span>
+</span></span><span class="line"><span class="cl">    <span class="n">svc</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">.</span><span class="bp">count</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">primary</span> <span class="p">=</span> <span class="n">svc</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="p">?</span> <span class="n">EmbeddedTabBarController</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">secondary</span> <span class="p">=</span> <span class="n">svc</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">as</span><span class="p">?</span> <span class="n">UINavigationController</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">.</span><span class="n">primary</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">secondary</span><span class="p">.</span><span class="n">popToRootViewController</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="kc">false</span><span class="p">)?.</span><span class="n">forEach</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">primary</span><span class="p">.</span><span class="n">rawPushViewController</span><span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">.</span><span class="n">primary</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们可以通过 UISplitViewControllerDelegate 的上述代理方法来实现 Will Collapse 时，视图堆栈的调整。Secondary Column 的导航控制器逐个弹出，再逐个压入 EmbeddedTabBarController 中。</p>
+<h4 id="expand">Expand</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">func</span> <span class="nf">splitViewController</span><span class="p">(</span><span class="kc">_</span> <span class="n">svc</span><span class="p">:</span> <span class="n">UISplitViewController</span><span class="p">,</span> <span class="n">displayModeForExpandingToProposedDisplayMode</span> <span class="n">proposedDisplayMode</span><span class="p">:</span> <span class="n">UISplitViewController</span><span class="p">.</span><span class="n">DisplayMode</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">UISplitViewController</span><span class="p">.</span><span class="n">DisplayMode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">guard</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">primary</span> <span class="p">=</span> <span class="n">svc</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">as</span><span class="p">?</span> <span class="n">EmbeddedTabBarController</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">.</span><span class="n">oneBesideSecondary</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">primary</span><span class="p">.</span><span class="n">popToRootViewController</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="kc">false</span><span class="p">)?.</span><span class="n">forEach</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">stackForExpanding</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="nv">$0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">.</span><span class="n">oneBesideSecondary</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">func</span> <span class="nf">splitViewControllerDidExpand</span><span class="p">(</span><span class="kc">_</span> <span class="n">svc</span><span class="p">:</span> <span class="n">UISplitViewController</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">guard</span>
+</span></span><span class="line"><span class="cl">    <span class="n">svc</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">.</span><span class="bp">count</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">secondary</span> <span class="p">=</span> <span class="n">svc</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">as</span><span class="p">?</span> <span class="n">UINavigationController</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">stackForExpanding</span><span class="p">.</span><span class="n">forEach</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">secondary</span><span class="p">.</span><span class="n">pushViewController</span><span class="p">(</span><span class="nv">$0</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">stackForExpanding</span> <span class="p">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>由于 displayModeForExpandingToProposedDisplayMode 调用时无法获取到默认设置的 UINavigationController，我们可以使用一个数组来临时保存视图控制器的引用，当分栏视图控制器 Did Expand 时再压入。</p>
+<h2 id="重写-uinavigationcontroller">重写 UINavigationController</h2>
+<p>上面的内容介绍了 AdaptiveNavigator 重写后的行为逻辑，为了配合 AdaptiveNavigator，我们需要对 UINavigationController 即 EmbeddedTabBarController 的部分方法进行重写。</p>
+<h3 id="显示模式">显示模式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">enum</span> <span class="nc">NavigationMode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">/// Used for integration with SplitView</span>
+</span></span><span class="line"><span class="cl">  <span class="k">case</span> <span class="n">embedded</span>
+</span></span><span class="line"><span class="cl">  <span class="k">case</span> <span class="n">alone</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>考虑到 iOS 平台和 iPadOS 平台行为的一致性，我们可以设置 EmbeddedTabBarController 显示模式，embedded 用于配合 AdaptiveNavigator 使用，alone 则用于无需 SplitView 时单独使用。</p>
+<h3 id="调整内置的-uitabbar">调整内置的 UITabBar</h3>
+<p>自定义 UITabBarController 的一大问题就在于需要手动设置 UITabBar的一些逻辑，本文仅简单对部分内容进行介绍，如有需求可能还需要自行探索。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nv">offset</span><span class="p">:</span> <span class="n">CGFloat</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nv">device</span> <span class="p">=</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">userInterfaceIdiom</span>
+</span></span><span class="line"><span class="cl">  <span class="k">switch</span> <span class="n">device</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="p">.</span><span class="n">phone</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="kd">let</span> <span class="nv">screen</span> <span class="p">=</span> <span class="n">view</span><span class="p">.</span><span class="n">window</span><span class="p">?.</span><span class="n">windowScene</span><span class="p">?.</span><span class="n">screen</span> <span class="p">??</span> <span class="n">UIScreen</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">let</span> <span class="nv">screenWidth</span> <span class="p">=</span> <span class="n">screen</span><span class="p">.</span><span class="n">nativeBounds</span><span class="p">.</span><span class="n">width</span> <span class="o">/</span> <span class="n">screen</span><span class="p">.</span><span class="n">nativeScale</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="n">screenWidth</span> <span class="o">&lt;</span> <span class="mi">400</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nv">orientation</span> <span class="p">=</span> <span class="n">UIDevice</span><span class="p">.</span><span class="n">current</span><span class="p">.</span><span class="n">orientation</span>
+</span></span><span class="line"><span class="cl">        <span class="k">switch</span> <span class="n">orientation</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="k">case</span> <span class="p">.</span><span class="n">portrait</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">49</span>
+</span></span><span class="line"><span class="cl">          <span class="k">case</span> <span class="p">.</span><span class="n">landscapeLeft</span><span class="p">,</span> <span class="p">.</span><span class="n">landscapeRight</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="mi">32</span>
+</span></span><span class="line"><span class="cl">          <span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="mi">49</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">    <span class="k">case</span> <span class="p">.</span><span class="n">pad</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="mi">50</span>
+</span></span><span class="line"><span class="cl">    <span class="k">default</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>定义用于设置 UITabBar 高度的计算属性</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="n">topConstraint</span> <span class="p">=</span> <span class="n">tabBar</span><span class="p">.</span><span class="n">topAnchor</span><span class="p">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">equalTo</span><span class="p">:</span> <span class="n">view</span><span class="p">.</span><span class="n">safeAreaLayoutGuide</span><span class="p">.</span><span class="n">bottomAnchor</span><span class="p">,</span> <span class="n">constant</span><span class="p">:</span> <span class="o">-</span><span class="n">offset</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">guard</span> <span class="kd">let</span> <span class="nv">topConstraint</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">NSLayoutConstraint</span><span class="p">.</span><span class="n">activate</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">  <span class="n">tabBar</span><span class="p">.</span><span class="n">leadingAnchor</span><span class="p">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">equalTo</span><span class="p">:</span> <span class="n">view</span><span class="p">.</span><span class="n">safeAreaLayoutGuide</span><span class="p">.</span><span class="n">leadingAnchor</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="n">tabBar</span><span class="p">.</span><span class="n">trailingAnchor</span><span class="p">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">equalTo</span><span class="p">:</span> <span class="n">view</span><span class="p">.</span><span class="n">trailingAnchor</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">  <span class="n">topConstraint</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="n">tabBar</span><span class="p">.</span><span class="n">bottomAnchor</span><span class="p">.</span><span class="n">constraint</span><span class="p">(</span><span class="n">equalTo</span><span class="p">:</span> <span class="n">view</span><span class="p">.</span><span class="n">bottomAnchor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">])</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>设置高度约束</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kr">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewWillTransition</span><span class="p">(</span><span class="n">to</span> <span class="n">size</span><span class="p">:</span> <span class="n">CGSize</span><span class="p">,</span> <span class="n">with</span> <span class="n">coordinator</span><span class="p">:</span> <span class="n">UIViewControllerTransitionCoordinator</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kc">super</span><span class="p">.</span><span class="n">viewWillTransition</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="n">size</span><span class="p">,</span> <span class="n">with</span><span class="p">:</span> <span class="n">coordinator</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">topConstraint</span><span class="p">?.</span><span class="n">constant</span> <span class="p">=</span> <span class="o">-</span><span class="n">offset</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>发生变化时调整高度</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kr">override</span> <span class="kd">public</span> <span class="kd">func</span> <span class="nf">viewWillLayoutSubviews</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kc">super</span><span class="p">.</span><span class="n">viewWillLayoutSubviews</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">countOfViewControllers</span> <span class="p">==</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">viewController</span> <span class="k">in</span> <span class="n">tabBarViewControllers</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">viewController</span><span class="p">.</span><span class="n">additionalSafeAreaInsets</span> <span class="p">=</span> <span class="n">UIEdgeInsets</span><span class="p">(</span><span class="n">top</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="kr">left</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">bottom</span><span class="p">:</span> <span class="n">offset</span><span class="p">,</span> <span class="kr">right</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>调整子视图控制器安全区
+<ul>
+<li>本文逻辑基于只有当选项卡对应的第一级视图显示时，才显示选项卡栏，所以只对第一级视图的安全区进行调整</li>
+</ul>
+</li>
+</ul>
+<h3 id="与-uitabbar-进一步配合">与 UITabBar 进一步配合</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kr">@objc</span> <span class="p">@</span><span class="n">MainActor</span> <span class="kd">public</span> <span class="kd">protocol</span> <span class="nc">EmbeddedTabBarControllerDelegate</span><span class="p">:</span> <span class="nb">NSObjectProtocol</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">@objc</span> <span class="kr">optional</span> <span class="kd">func</span> <span class="nf">tabBarController</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kc">_</span> <span class="n">tabBarController</span><span class="p">:</span> <span class="n">EmbeddedTabBarController</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">shouldSelect</span> <span class="n">viewController</span><span class="p">:</span> <span class="n">UIViewController</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span> <span class="p">-&gt;</span> <span class="nb">Bool</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">@objc</span> <span class="kr">optional</span> <span class="kd">func</span> <span class="nf">tabBarController</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="kc">_</span> <span class="n">tabBarController</span><span class="p">:</span> <span class="n">EmbeddedTabBarController</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">didSelect</span> <span class="n">viewController</span><span class="p">:</span> <span class="n">UIViewController</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在这里，我们简单定义了两个代理方法，可以根据需要自行增加或者修改。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tabBar</span><span class="p">(</span><span class="kc">_</span> <span class="n">tabBar</span><span class="p">:</span> <span class="n">UITabBar</span><span class="p">,</span> <span class="n">didSelect</span> <span class="n">item</span><span class="p">:</span> <span class="n">UITabBarItem</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nv">viewController</span> <span class="p">=</span> <span class="n">tabBarViewControllers</span><span class="p">[</span><span class="n">tabBar</span><span class="p">.</span><span class="n">items</span><span class="p">?.</span><span class="n">firstIndex</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="n">item</span><span class="p">)</span> <span class="p">??</span> <span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">if</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">tabBarDelegate</span> <span class="p">=</span> <span class="n">tabBarDelegate</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tabBarDelegate</span><span class="p">.</span><span class="n">responds</span><span class="p">(</span><span class="n">to</span><span class="p">:</span> <span class="k">#selector</span><span class="p">(</span><span class="n">tabBarDelegate</span><span class="p">.</span><span class="n">tabBarController</span><span class="p">(</span><span class="kc">_</span><span class="p">:</span><span class="n">shouldSelect</span><span class="p">:)))</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">tabBarDelegate</span><span class="p">.</span><span class="n">tabBarController</span><span class="p">?(</span><span class="kc">self</span><span class="p">,</span> <span class="n">shouldSelect</span><span class="p">:</span> <span class="n">viewController</span><span class="p">)</span> <span class="p">??</span> <span class="kc">true</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">replaceContent</span><span class="p">(</span><span class="n">with</span><span class="p">:</span> <span class="n">viewController</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">tabBar</span><span class="p">.</span><span class="n">selectedItem</span> <span class="p">=</span> <span class="p">(</span><span class="n">selectedIndex</span> <span class="o">!=</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">?</span> <span class="n">tabBar</span><span class="p">.</span><span class="n">items</span><span class="p">?[</span><span class="n">selectedIndex</span> <span class="p">??</span> <span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">replaceContent</span><span class="p">(</span><span class="n">with</span><span class="p">:</span> <span class="n">viewController</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">tabBarDelegate</span><span class="p">?.</span><span class="n">tabBarController</span><span class="p">?(</span><span class="kc">self</span><span class="p">,</span> <span class="n">didSelect</span><span class="p">:</span> <span class="n">viewController</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">replaceContent</span><span class="p">(</span><span class="n">with</span> <span class="n">viewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">setViewControllers</span><span class="p">([</span><span class="n">viewController</span><span class="p">],</span> <span class="n">animated</span><span class="p">:</span> <span class="kc">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">countOfViewControllers</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="n">selectedViewController</span> <span class="p">=</span> <span class="n">viewController</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实现 UITabBar 代理。此处我们使用无动画的 <code>setViewControllers</code> 来实现设置选项卡栏的显示视图，并且设置计数器和辅助的属性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">/// The currently selected view controller.</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">var</span> <span class="nv">selectedViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">?</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">didSet</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="kd">let</span> <span class="nv">selectedViewController</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">guard</span> <span class="kd">let</span> <span class="nv">index</span> <span class="p">=</span> <span class="n">tabBarViewControllers</span><span class="p">.</span><span class="n">firstIndex</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="n">selectedViewController</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="n">tabBar</span><span class="p">.</span><span class="n">selectedItem</span> <span class="p">=</span> <span class="n">tabBar</span><span class="p">.</span><span class="n">items</span><span class="p">?[</span><span class="n">index</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">tabBar</span><span class="p">.</span><span class="n">selectedItem</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">/// Index of the currently selected view controller.</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">var</span> <span class="nv">selectedIndex</span><span class="p">:</span> <span class="nb">Int</span><span class="p">?</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">get</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">guard</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">let</span> <span class="nv">selectedViewController</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="kd">let</span> <span class="nv">index</span> <span class="p">=</span> <span class="n">tabBarViewControllers</span><span class="p">.</span><span class="n">firstIndex</span><span class="p">(</span><span class="n">of</span><span class="p">:</span> <span class="n">selectedViewController</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">nil</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">index</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">set</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="kd">let</span> <span class="nv">newValue</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">guard</span> <span class="n">newValue</span> <span class="o">&lt;</span> <span class="n">tabBarViewControllers</span><span class="p">.</span><span class="bp">count</span> <span class="k">else</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="n">selectedViewController</span> <span class="p">=</span> <span class="n">tabBarViewControllers</span><span class="p">[</span><span class="n">newValue</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="n">replaceWithSelectedViewController</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">selectedViewController</span> <span class="p">=</span> <span class="kc">nil</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">func</span> <span class="nf">replaceWithSelectedViewController</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="kd">let</span> <span class="nv">selectedViewController</span> <span class="p">=</span> <span class="n">selectedViewController</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">replaceContent</span><span class="p">(</span><span class="n">with</span><span class="p">:</span> <span class="n">selectedViewController</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">/// The view controllers displayed by the tab bar.</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">var</span> <span class="nv">tabBarViewControllers</span><span class="p">:</span> <span class="p">[</span><span class="n">UIViewController</span><span class="p">]</span> <span class="p">=</span> <span class="p">[]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">didSet</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tabBar</span><span class="p">.</span><span class="n">items</span> <span class="p">=</span> <span class="n">tabBarViewControllers</span><span class="p">.</span><span class="bp">map</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nv">$0</span><span class="p">.</span><span class="n">tabBarItem</span> <span class="p">??</span> <span class="n">UITabBarItem</span><span class="p">(</span><span class="n">title</span><span class="p">:</span> <span class="nv">$0</span><span class="p">.</span><span class="n">title</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在这里我们定义了一些辅助属性，可以根据需要进行更改。</li>
+</ul>
+<h3 id="与-navigator-进行配合">与 Navigator 进行配合</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kr">override</span> <span class="kd">func</span> <span class="nf">pushViewController</span><span class="p">(</span><span class="kc">_</span> <span class="n">viewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="nb">Bool</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">navigationMode</span> <span class="p">==</span> <span class="p">.</span><span class="n">embedded</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">navigator</span><span class="p">?.</span><span class="n">showDetailViewController</span><span class="p">(</span><span class="n">viewController</span><span class="p">,</span> <span class="n">sender</span><span class="p">:</span> <span class="kc">self</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">countOfViewControllers</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="kc">super</span><span class="p">.</span><span class="n">pushViewController</span><span class="p">(</span><span class="n">viewController</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="n">animated</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">rawPushViewController</span><span class="p">(</span><span class="kc">_</span> <span class="n">viewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="nb">Bool</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">countOfViewControllers</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="kc">super</span><span class="p">.</span><span class="n">pushViewController</span><span class="p">(</span><span class="n">viewController</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="n">animated</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>使用 countOfViewControllers 来记录选项卡栏的视图的逻辑层级，视图 push 时增加 1，pop 则减少 1</li>
+<li>重写 pushViewController 以便调用（如UIHostingController 中 SwiftUI 视图的 NavigationLink 的默认行为）</li>
+<li>用 rawPushViewController 保留原来的 push 逻辑</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">func</span> <span class="nf">navigationController</span><span class="p">(</span><span class="kc">_</span> <span class="n">navigationController</span><span class="p">:</span> <span class="n">UINavigationController</span><span class="p">,</span> <span class="n">didShow</span> <span class="n">viewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">,</span> <span class="n">animated</span><span class="p">:</span> <span class="nb">Bool</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nv">poppedViewController</span> <span class="p">=</span> <span class="n">navigationController</span><span class="p">.</span><span class="n">transitionCoordinator</span><span class="p">?.</span><span class="n">viewController</span><span class="p">(</span><span class="n">forKey</span><span class="p">:</span> <span class="p">.</span><span class="n">from</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">     <span class="o">!</span><span class="n">navigationController</span><span class="p">.</span><span class="n">viewControllers</span><span class="p">.</span><span class="bp">contains</span><span class="p">(</span><span class="n">poppedViewController</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">countOfViewControllers</span> <span class="o">-=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">override</span> <span class="kd">func</span> <span class="nf">popToRootViewController</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="nb">Bool</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="p">[</span><span class="n">UIViewController</span><span class="p">]?</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">countOfViewControllers</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="kc">super</span><span class="p">.</span><span class="n">popToRootViewController</span><span class="p">(</span><span class="n">animated</span><span class="p">:</span> <span class="n">animated</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在这里，我们重写方法以实现在弹出时减少计数以及弹出至根视图时重置计数器</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nv">countOfViewControllers</span><span class="p">:</span> <span class="nb">Int</span> <span class="p">=</span> <span class="mi">0</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">didSet</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">countOfViewControllers</span> <span class="o">&lt;=</span> <span class="mi">1</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">showTabBar</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">hideTabBar</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">hideTabBar</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">isTabBarHidden</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">isTabBarHidden</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">UIView</span><span class="p">.</span><span class="n">animate</span><span class="p">(</span><span class="n">withDuration</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">)</span> <span class="p">{</span> <span class="p">[</span><span class="kr">unowned</span> <span class="kc">self</span><span class="p">]</span> <span class="k">in</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tabBar</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">showTabBar</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="o">!</span><span class="n">isTabBarHidden</span> <span class="p">{</span> <span class="k">return</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">isTabBarHidden</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">UIView</span><span class="p">.</span><span class="n">animate</span><span class="p">(</span><span class="n">withDuration</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">)</span> <span class="p">{</span> <span class="p">[</span><span class="kr">unowned</span> <span class="kc">self</span><span class="p">]</span> <span class="k">in</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tabBar</span><span class="p">.</span><span class="n">alpha</span> <span class="p">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>观察 countOfViewControllers 以实现显示和隐藏选项卡栏</li>
+<li>通过上述代码简单完成了显示和隐藏选项卡栏的动画，可以根据需要自行更改显示的效果</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/coordinator-introduction/">
+        
+        
+            <div class="article-image">
+                <img src="/p/coordinator-introduction/_hu3d03a01dcc18bc5be0e67db3d8d209a6_217027_780e4aadff8bafe71ea90d94540987cf.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Coordinator 模式"
+                        data-key="coordinator-introduction" 
+                        data-hash="md5-YT&#43;pYSoX/bxweT0NqabBpw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Coordinator 模式</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/ios-concurrency/">
+        
+        
+            <div class="article-image">
+                <img src="/p/ios-concurrency/_hu3d03a01dcc18bc5be0e67db3d8d209a6_640439_654a6c067d67ec40d43dbf8537339792.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post iOS 并发引入"
+                        data-key="ios-concurrency" 
+                        data-hash="md5-&#43;p53gLxipxJEt7NJ272H&#43;w==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">iOS 并发引入</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/state-management/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">关于 iOS 中状态管理的完整指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 Lagrange
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.20.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
