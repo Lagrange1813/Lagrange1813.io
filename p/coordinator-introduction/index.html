@@ -2,16 +2,16 @@
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Coordinator 模式将传统场景下由 UIViewController 承担的导航职责抽离为单独的部分，来避免 ViewController 的过度膨胀，并促进 ViewController 的重用。'>
-<title>Coordinator 模式</title>
+<title>使用 Coordinator 模式处理 SwiftUI 与 UIKit 混合导航</title>
 
 <link rel='canonical' href='https://example.com/p/coordinator-introduction/'>
 
-<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='Coordinator 模式'>
+<link rel="stylesheet" href="/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css"><meta property='og:title' content='使用 Coordinator 模式处理 SwiftUI 与 UIKit 混合导航'>
 <meta property='og:description' content='Coordinator 模式将传统场景下由 UIViewController 承担的导航职责抽离为单独的部分，来避免 ViewController 的过度膨胀，并促进 ViewController 的重用。'>
 <meta property='og:url' content='https://example.com/p/coordinator-introduction/'>
 <meta property='og:site_name' content='Lagrange1813&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2023-09-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-09-22T00:00:00&#43;00:00'/><meta property='og:image' content='https://example.com/p/coordinator-introduction/neom-bhKqZNZeAR0-unsplash.jpg' />
-<meta name="twitter:title" content="Coordinator 模式">
+<meta name="twitter:title" content="使用 Coordinator 模式处理 SwiftUI 与 UIKit 混合导航">
 <meta name="twitter:description" content="Coordinator 模式将传统场景下由 UIViewController 承担的导航职责抽离为单独的部分，来避免 ViewController 的过度膨胀，并促进 ViewController 的重用。"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://example.com/p/coordinator-introduction/neom-bhKqZNZeAR0-unsplash.jpg' />
     </head>
@@ -57,7 +57,7 @@
                     
                     
                         
-                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                        <img src="/img/avatar_huf492c856b3913c1cb945c645e7b2e17f_21606_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -268,7 +268,7 @@
                         width="800" 
                         height="533" 
                         loading="lazy"
-                        alt="Featured image of post Coordinator 模式" />
+                        alt="Featured image of post 使用 Coordinator 模式处理 SwiftUI 与 UIKit 混合导航" />
                 
             </a>
         </div>
@@ -295,7 +295,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/coordinator-introduction/">Coordinator 模式</a>
+            <a href="/p/coordinator-introduction/">使用 Coordinator 模式处理 SwiftUI 与 UIKit 混合导航</a>
         </h2>
     
         
@@ -336,7 +336,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 2 分钟
+                    阅读时长: 3 分钟
                 </time>
             </div>
         
@@ -352,7 +352,7 @@
     
     
     <h2 id="coordinator-模式"><code>Coordinator</code> 模式</h2>
-<p><a class="link" href="https://khanlou.com/2015/01/the-coordinator/"  target="_blank" rel="noopener"
+<p>2015 年，<a class="link" href="https://khanlou.com/2015/01/the-coordinator/"  target="_blank" rel="noopener"
     >Soroush Khanlou</a> 就向 Apple 社区介绍了 <code>Coordinator</code> 模式这一概念。简而言之，这一模式将传统场景下由 UIViewController 承担的导航职责抽离为单独的部分，来避免 ViewController 的过度膨胀，并促进 ViewController 的重用。</p>
 <p>我们来看一下下面这段代码：</p>
 <div class="highlight"><div class="chroma">
@@ -388,7 +388,7 @@
 <p>经过实验，我们可以发现，可以直接在 B 视图中使用 <code>NavigationLink</code> 导航到 C 视图控制器，并且包裹 A 视图控制器的 <code>UINavigationController</code> 会自动作为 <code>NavigationView</code> / <code>NavigationStack</code> 与 <code>NavigationLink</code> 配合生效。看起来 Apple 默默做的很好，但一旦事情变得复杂起来，例如需要 B 视图在 Secondary Column 中推出 C 视图控制器时，以上的两种方案均有问题。</p>
 <p>方案一中，我们无法找到 <code>showDetailViewController</code> 在 SwiftUI 中的同等声明方式，因此无法实现相应的效果。而在方案二中，我们需要传入 <code>splitViewController</code>，这导致视图变得更加复杂。</p>
 <h2 id="coordinator-模式应对混合"><code>Coordinator</code> 模式应对混合</h2>
-<p>那么，不妨使用 <code>Coordinator</code> 模式来处理上述问题。</p>
+<p>那么，不妨使用 <code>Coordinator</code> 模式来处理上述问题。在这里，我们用 router 表示 SwiftUI视图 / UIKit视图控制器持有的 Coordinator 实例。</p>
 <p>我们在 SwiftUI 视图或者 UIKit 视图控制器创建时注入一个 router 实例，并在需要导航时，调用 router 的方法来处理导航。</p>
 <p>这样，在不同的使用场景下，我们可以给 SwiftUI 视图或者 UIKit 视图控制器注入不同的 router，来实现不同的导航；视图控制器也不需要考虑具体的导航方式和下一个视图，只需提供数据即可；SwiftUI 视图也只需要使用 router 来处理一切即可。</p>
 
