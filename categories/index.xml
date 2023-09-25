@@ -7,10 +7,10 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Lagrange</copyright>
-        <lastBuildDate>Fri, 22 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 25 Sep 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>iOS</title>
         <link>https://example.com/categories/ios/</link>
-        <pubDate>Fri, 22 Sep 2023 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 25 Sep 2023 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/categories/ios/</guid>
         <description>&lt;img src="https://example.com/categories/ios/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post iOS" /&gt;</description>
@@ -18,7 +18,7 @@
         <item>
         <title>SwiftUI</title>
         <link>https://example.com/categories/swiftui/</link>
-        <pubDate>Fri, 22 Sep 2023 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 25 Sep 2023 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/categories/swiftui/</guid>
         <description></description>
@@ -26,7 +26,7 @@
         <item>
         <title>UIKit</title>
         <link>https://example.com/categories/uikit/</link>
-        <pubDate>Fri, 22 Sep 2023 00:00:00 +0000</pubDate>
+        <pubDate>Mon, 25 Sep 2023 00:00:00 +0000</pubDate>
         
         <guid>https://example.com/categories/uikit/</guid>
         <description></description>

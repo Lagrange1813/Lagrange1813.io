@@ -366,12 +366,12 @@
     
     <p>在 Classic Style 的 UISplitViewController 中，已有较为完善的方案实现在 UISplitViewController Master 页面嵌套 UITabBarController，并达成类似 ShortCut 应用在 Expand 和 Collapse 时自动调整视图堆栈的效果，但在 Column Style 的 UISplitViewController 中，这些方案由于 Apple 禁止将 Primary Column 设置为 UITabBarController 而无法实现。</p>
 <p>本文基于经典风格的方案进行调整优化，以实现在 Column Style SplitViewController 中实现视图控制器堆栈自适应调整的自适应导航效果。</p>
-<div align="center"><img src="https://raw.githubusercontent.com/Gravitation1813/image-hosting/main/2023/202304292340262.gif" width="700px"/></div>
+<div align="center"><img src="https://raw.githubusercontent.com/Gravitation1813/img-hosting/master/2023/202304292340262.gif" width="700px"/></div>
 <p>基于探索，UISplitViewController 无法在 Primary Column 使用 UITabBarController 的主要原因是 UINavigationController 的嵌套会造成崩溃，根据 Apple 的文档来看，UISplitViewController 会默认在非 UINavigationController 的 Primary Column 视图外嵌套一层 UINavigationController，而这造成了与 UITabBarController 的冲突。</p>
 <p>在早期探索中，可以使用自定义 TabBarController 的方案来绕过限制，即自定义容器视图控制器，添加 UITabBar并实现代理。但是，如果在外层嵌套导航控制器，会导致导航栏无法对子视图控制器的行为产生响应（如大标题风格导航栏的折叠等），而在内层嵌套，即将子视图控制器包裹在导航控制器中，又会导致两层导航控制器的冲突（UISplitViewController 默认添加的和包裹子视图控制器的）。</p>
 <p>本文采取了一种较为巧妙的方案，即子类化 UINavigationController，添加导航栏，并重写部分方法以达成 UITabBarController 的效果。</p>
 <h2 id="相关概念">相关概念</h2>
-<div align="center"><img src="https://raw.githubusercontent.com/Gravitation1813/image-hosting/main/2023/202306011634949.png" width="700px"/></div>
+<div align="center"><img src="https://raw.githubusercontent.com/Gravitation1813/img-hosting/master/2023/202306011634949.png" width="700px"/></div>
 <ul>
 <li>子类化 UISplitViewController 为 AdaptiveNavigator 以便重写相应方法
 <ul>
@@ -828,11 +828,9 @@
 </span><span class="lnt">44
 </span><span class="lnt">45
 </span><span class="lnt">46
-</span><span class="lnt">47
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">/// The currently selected view controller.</span>
+<pre tabindex="0" class="chroma"><code class="language-swift" data-lang="swift"><span class="line"><span class="cl"><span class="c1">/// The currently selected view controller.</span>
 </span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">var</span> <span class="nv">selectedViewController</span><span class="p">:</span> <span class="n">UIViewController</span><span class="p">?</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kr">didSet</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="kd">let</span> <span class="nv">selectedViewController</span> <span class="p">{</span>
@@ -1075,6 +1073,30 @@
     <h2 class="section-title">相关文章</h2>
     <div class="related-content">
         <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/demystify-swiftui/">
+        
+        
+            <div class="article-image">
+                <img src="/p/demystify-swiftui/_hu3d03a01dcc18bc5be0e67db3d8d209a6_761091_cd545ee9a44cd347901f875af3c563b8.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 揭秘 SwiftUI"
+                        data-key="demystify-swiftui" 
+                        data-hash="md5-9XB5bl6DiC0o0fSjlnDmdw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">揭秘 SwiftUI</h2>
+        </div>
+    </a>
+</article>
+
             
                 
 <article class="has-image">
